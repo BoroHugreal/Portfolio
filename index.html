@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio de Hugo Alves Miranda - Étudiant BUT Informatique spécialisation Data">
-    <meta name="keywords" content="Data Analyst, Data Engineering, BUT Informatique, Portfolio, Stage">
+    <meta name="keywords" content="Data Analyst, Data Engineering, BUT Informatique, Portfolio">
     <meta name="author" content="Hugo Alves Miranda">
     <title>Hugo Alves Miranda | Portfolio</title>
     
@@ -20,6 +20,38 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Correction pour l'avatar qui ne doit pas tourner */
+        .avatar-wrapper .avatar-gradient {
+            animation: none !important;
+        }
+        
+        /* L'image elle-même ne doit pas tourner */
+        .avatar-inner {
+            animation: none !important;
+        }
+        
+        /* Seule la bordure doit tourner */
+        .avatar-border-rotate {
+            position: absolute;
+            inset: -4px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            animation: rotate 8s linear infinite;
+            z-index: 0;
+        }
+        
+        .avatar-wrapper {
+            position: relative;
+        }
+        
+        .avatar-gradient {
+            position: relative;
+            z-index: 1;
+            background: var(--color-bg);
+        }
+    </style>
 </head>
 <body class="dark-theme">
     
@@ -53,16 +85,17 @@
         <div class="container">
             <div class="hero-content fade-in">
                 
-                <!-- Avatar -->
+                <!-- Avatar avec bordure tournante uniquement -->
                 <div class="hero-avatar">
                     <div class="avatar-wrapper">
+                        <div class="avatar-border-rotate"></div>
                         <div class="avatar-gradient">
                             <div class="avatar-inner">
                                 <img src="assets/img/profile.png" alt="Hugo Alves Miranda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                                 <div class="avatar-fallback">HA</div>
                             </div>
                         </div>
-                        <div class="status-indicator" title="Disponible pour un stage"></div>
+                        <div class="status-indicator" title="Étudiant actif"></div>
                     </div>
                 </div>
 
@@ -76,31 +109,31 @@
 
                 <!-- Description -->
                 <p class="hero-description">
-                    Recherche de stage 14 semaines (02/03 - 06/07) en Data Analysis, Data Engineering ou Data Journalism
+                    Passionné par l'analyse de données et le développement, je conçois des solutions techniques alliant bases de données, automatisation et visualisation.
                 </p>
 
                 <!-- Compétences clés -->
                 <div class="skills-tags">
-                    <span class="skill-tag">SQL (MySQL, PostgreSQL)</span>
-                    <span class="skill-tag">Modélisation BDD</span>
-                    <span class="skill-tag">Scraping Python</span>
+                    <span class="skill-tag">SQL & Bases de données</span>
+                    <span class="skill-tag">Python & Automatisation</span>
                     <span class="skill-tag">Pipelines ETL</span>
+                    <span class="skill-tag">Développement Web</span>
                 </div>
 
                 <!-- Boutons d'action -->
                 <div class="hero-actions">
                     <a href="projects.html" class="btn btn-primary">
-                        <span>Voir mes projets</span>
+                        <span>Découvrir mes projets</span>
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
-                    <a href="contact.html" class="btn btn-secondary">Me contacter</a>
+                    <a href="about.html" class="btn btn-secondary">En savoir plus</a>
                 </div>
 
                 <!-- Indication navigation clavier -->
                 <div class="keyboard-hint">
-                    <p>Navigation rapide:</p>
+                    <p>Navigation rapide au clavier :</p>
                     <div class="keyboard-shortcuts">
                         <kbd>H</kbd> Accueil
                         <kbd>A</kbd> À propos
@@ -113,12 +146,14 @@
         </div>
 
         <!-- Particules d'arrière-plan (optionnel) -->
-        <div class="particles" id="particles"></div>
-    </section>
+        <!-- Dans votre HTML (généralement index.html ou le layout principal) -->
+        <!-- Ajouter ce conteneur au début du body, avant tout autre contenu -->
+        <div class="particles" id="particles-bg"></div>    </section>
 
     <!-- Section Aperçu rapide -->
     <section class="quick-overview">
         <div class="container">
+            <h2 class="section-title">Aperçu</h2>
             <div class="overview-grid">
                 
                 <!-- Formation -->
@@ -131,11 +166,11 @@
                     </div>
                     <h3>Formation</h3>
                     <p>BUT Informatique</p>
-                    <p class="text-muted">Spécialisation Data</p>
-                    <p class="text-small">IUT Créteil-Vitry (UPEC)</p>
+                    <p class="text-muted">Spécialisation Data Science</p>
+                    <p class="text-small">IUT Créteil-Vitry (UPEC) · 2023-2026</p>
                 </div>
 
-                <!-- Expérience -->
+                <!-- Expérience récente -->
                 <div class="overview-card slide-up" style="animation-delay: 0.1s;">
                     <div class="card-icon cyan">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -144,26 +179,59 @@
                             <path d="M3 12H21" stroke="currentColor" stroke-width="2"/>
                         </svg>
                     </div>
-                    <h3>Stage actuel</h3>
-                    <p>Laboratoire LISSI</p>
+                    <h3>Expérience récente</h3>
+                    <p>Stage · Laboratoire LISSI</p>
                     <p class="text-muted">Pilotage Robot Go2</p>
                     <p class="text-small">Avril-Juin 2025</p>
                 </div>
 
-                <!-- Langues -->
+                <!-- Domaines d'expertise -->
                 <div class="overview-card slide-up" style="animation-delay: 0.2s;">
                     <div class="card-icon purple">
                         <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
-                            <path d="M2 12H22M12 2C14.5 4.5 16 8.5 16 12C16 15.5 14.5 19.5 12 22M12 2C9.5 4.5 8 8.5 8 12C8 15.5 9.5 19.5 12 22" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 3h7v7H3V3zM14 3h7v7h-7V3zM14 14h7v7h-7v-7zM3 14h7v7H3v-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h3>Langues</h3>
-                    <p>Anglais · Courant</p>
-                    <p>Portugais · Courant</p>
-                    <p class="text-muted">Espagnol · Intermédiaire</p>
+                    <h3>Expertises</h3>
+                    <p>Data Engineering</p>
+                    <p>Développement Web</p>
+                    <p class="text-muted">Architecture de données</p>
                 </div>
 
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Statistiques -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number gradient-text">10+</div>
+                    <div class="stat-label">Projets réalisés</div>
+                </div>
+                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="stat-number gradient-text">3</div>
+                    <div class="stat-label">Langues parlées</div>
+                </div>
+                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="stat-number gradient-text">2+</div>
+                    <div class="stat-label">Années d'études</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section cta-compact">
+        <div class="container">
+            <div class="cta-content">
+                <h2><span class="gradient-text">Travaillons ensemble</span></h2>
+                <p>Intéressé par mon profil ? N'hésitez pas à me contacter pour échanger.</p>
+                <div class="cta-actions">
+                    <a href="contact.html" class="btn btn-primary">Me contacter</a>
+                    <a href="projects.html" class="btn btn-secondary">Voir les projets</a>
+                </div>
             </div>
         </div>
     </section>
@@ -173,7 +241,7 @@
         <div class="container">
             <div class="footer-content">
                 <p>&copy; 2025 Hugo Alves Miranda · Étudiant BUT Informatique</p>
-                <p class="text-muted">Conçu avec passion à Paris</p>
+                <p class="text-muted">Portfolio conçu avec passion</p>
             </div>
         </div>
     </footer>
@@ -183,6 +251,7 @@
     <script src="js/keyboard-nav.js"></script>
     <script src="js/animations.js"></script>
     <script src="js/particles.js"></script>
+    <script src="js/theme-toggle.js"></script>
     
 </body>
 </html>

@@ -24,6 +24,30 @@
   };
 
   // ========================================
+  // DÉTECTION DU THÈME
+  // ========================================
+
+  function getThemeColors() {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark' || 
+                   window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (isDark) {
+      return ['#00ffff', '#a855f7', '#ff00ff']; // Thème sombre
+    } else {
+      return ['#0066ff', '#ff6600', '#ff0099']; // Thème clair (plus vibrant)
+    }
+  }
+
+  function updateParticleColors() {
+    config.colors = getThemeColors();
+  }
+
+  // Écouter les changements de thème
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    updateParticleColors();
+  });
+
+  // ========================================
   // CLASSE PARTICLE
   // ========================================
   
@@ -268,8 +292,8 @@
         const duration = Math.random() * 10 + 10;
         const delay = Math.random() * 5;
         
-        // Couleur aléatoire
-        const colors = ['#00ffff', '#a855f7', '#ff00ff'];
+        // Couleur aléatoire selon le thème
+        const colors = getThemeColors();
         const color = colors[Math.floor(Math.random() * colors.length)];
 
         particle.style.cssText = `
@@ -307,6 +331,9 @@
       console.log('⚡ Particles disabled (reduced motion preference)');
       return;
     }
+
+    // Mettre à jour les couleurs avant d'initialiser
+    updateParticleColors();
 
     if (isMobile) {
       // Version légère pour mobile
