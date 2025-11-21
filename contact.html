@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contactez Hugo Alves Miranda pour un stage ou une collaboration Data">
+    <meta name="keywords" content="Contact, Stage Data, Collaboration, Portfolio">
+    <meta name="author" content="Hugo Alves Miranda">
+    <title>Contact | Hugo Alves Miranda</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navigation principale -->
+    <nav id="mainNav" class="main-nav">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="logo-gradient">HA.M</span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-key="H">Accueil <kbd>H</kbd></a></li>
+                <li><a href="about.html" class="nav-link" data-key="A">À propos <kbd>A</kbd></a></li>
+                <li><a href="projects.html" class="nav-link" data-key="P">Projets <kbd>P</kbd></a></li>
+                <li><a href="contact.html" class="nav-link active" data-key="C">Contact <kbd>C</kbd></a></li>
+            </ul>
+
+            <!-- Burger Menu Mobile -->
+            <button class="burger-menu" id="burgerMenu" aria-label="Menu de navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header de la page -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content fade-in">
+                <h1 class="page-title">
+                    <span class="gradient-text">Contactez-moi</span>
+                </h1>
+                <p class="page-subtitle">Discutons de votre projet ou d'une opportunité de stage</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact principal -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-grid">
+
+                <!-- Formulaire de contact -->
+                <div class="contact-form-wrapper slide-up">
+                    <div class="form-header">
+                        <h2>Envoyez-moi un message</h2>
+                        <p>Je vous répondrai dans les plus brefs délais</p>
+                    </div>
+
+                    <div id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input 
+                                type="text" 
+                                id="name" 
+                                name="name" 
+                                placeholder="Jean Dupont" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                placeholder="jean.dupont@exemple.fr" 
+                                required
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Sujet *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="stage">Proposition de stage</option>
+                                <option value="projet">Collaboration projet</option>
+                                <option value="question">Question générale</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea 
+                                id="message" 
+                                name="message" 
+                                rows="6" 
+                                placeholder="Parlez-moi de votre projet ou de votre opportunité..." 
+                                required
+                            ></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large" id="submitBtn">
+                            <span>Envoyer le message</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+
+                        <div id="formMessage" class="form-message"></div>
+                    </div>
+                </div>
+
+                <!-- Informations de contact -->
+                <div class="contact-info-wrapper slide-up" style="animation-delay: 0.1s;">
+                    
+                    <!-- Disponibilité -->
+                    <div class="info-card availability-card">
+                        <div class="info-icon purple">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Disponibilité</h3>
+                        <p class="availability-status">
+                            <span class="status-dot active"></span>
+                            Disponible pour un stage
+                        </p>
+                        <p class="availability-dates">02/03/2025 - 06/07/2025</p>
+                        <p class="text-muted">14 semaines</p>
+                    </div>
+
+                    <!-- Coordonnées -->
+                    <div class="info-card">
+                        <div class="info-icon cyan">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 8L10.89 13.26C11.54 13.67 12.46 13.67 13.11 13.26L21 8M5 19H19C20.1046 19 21 18.1046 21 17V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7V17C3 18.1046 3.89543 19 5 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Email</h3>
+                        <a href="mailto:hugo.alves-miranda@etu.u-pec.fr" class="contact-link">
+                            hugo.alves-miranda@etu.u-pec.fr
+                        </a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon purple">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M22 16.92V19.92C22 20.4728 21.5523 20.9203 21 20.9203H21C9.40202 20.4724 0.527701 11.598 0.0798417 0H3.08C3.63228 0 4.08 0.447715 4.08 1V1C4.08 1.91251 4.24077 2.80397 4.53848 3.63683L4.92308 4.76923C5.09615 5.26154 4.96154 5.80769 4.6 6.16923L3.2 7.56923C4.8 11.2 8.8 15.2 12.4308 16.8L13.8308 15.4C14.1923 15.0385 14.7385 14.9038 15.2308 15.0769L16.3632 15.4615C17.196 15.7592 18.0875 15.92 19 15.92V15.92C19.5523 15.92 20 16.3677 20 16.92Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Téléphone</h3>
+                        <a href="tel:+33660974636" class="contact-link">
+                            +33 6 60 97 46 36
+                        </a>
+                    </div>
+
+                    <div class="info-card">
+                        <div class="info-icon cyan">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2C8.13 2 5 5.13 5 9C5 14.25 12 22 12 22C12 22 19 14.25 19 9C19 5.13 15.87 2 12 2Z" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Localisation</h3>
+                        <p>75007 Paris</p>
+                        <p class="text-muted">Île-de-France</p>
+                    </div>
+
+                    <!-- Réseaux sociaux -->
+                    <div class="social-links">
+                        <h3>Retrouvez-moi sur</h3>
+                        <div class="social-buttons">
+                            <a href="https://www.linkedin.com/in/hugo-alves-miranda" target="_blank" class="social-btn linkedin" title="LinkedIn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </a>
+                            <a href="https://github.com/yourusername" target="_blank" class="social-btn github" title="GitHub">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section FAQ rapide -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="gradient-text">Questions fréquentes</span>
+            </h2>
+
+            <div class="faq-grid">
+                
+                <div class="faq-card slide-up">
+                    <div class="faq-icon">❓</div>
+                    <h3>Quel type de stage recherchez-vous ?</h3>
+                    <p>Je recherche un stage de 14 semaines (02/03 - 06/07/2025) dans le domaine de la Data : Data Analyst, Data Engineer, ou Data Journalist.</p>
+                </div>
+
+                <div class="faq-card slide-up" style="animation-delay: 0.1s;">
+                    <div class="faq-icon">⏰</div>
+                    <h3>Quelles sont vos disponibilités ?</h3>
+                    <p>Je suis disponible à partir du 2 mars 2025 pour une durée de 14 semaines, jusqu'au 6 juillet 2025.</p>
+                </div>
+
+                <div class="faq-card slide-up" style="animation-delay: 0.2s;">
+                    <div class="faq-icon">💼</div>
+                    <h3>Quelles sont vos compétences principales ?</h3>
+                    <p>SQL (MySQL, PostgreSQL), Python (Scraping, API), modélisation BDD, pipelines ETL, développement web (PHP, JavaScript) et Power BI.</p>
+                </div>
+
+                <div class="faq-card slide-up" style="animation-delay: 0.3s;">
+                    <div class="faq-icon">📍</div>
+                    <h3>Où êtes-vous localisé ?</h3>
+                    <p>Je suis basé à Paris (75007) et disponible pour des stages en Île-de-France ou en remote.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section cta-compact">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>Prêt à collaborer ?</h2>
+                <p>Téléchargez mon CV ou consultez mes projets</p>
+                <div class="cta-actions">
+                    <a href="assets/docs/CV_ALVESMIRANDA_STAGE.pdf" class="btn btn-primary btn-large" download>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 15V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7 10L12 15L17 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Télécharger CV</span>
+                    </a>
+                    <a href="projects.html" class="btn btn-secondary btn-large">Voir mes projets</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Hugo Alves Miranda · Étudiant BUT Informatique</p>
+                <p class="text-muted">Conçu avec passion à Paris</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/navigation.js"></script>
+    <script src="js/keyboard-nav.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/contact-form.js"></script>
+    
+</body>
+</html>

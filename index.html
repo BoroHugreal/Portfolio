@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio de Hugo Alves Miranda - Étudiant BUT Informatique spécialisation Data">
+    <meta name="keywords" content="Data Analyst, Data Engineering, BUT Informatique, Portfolio, Stage">
+    <meta name="author" content="Hugo Alves Miranda">
+    <title>Hugo Alves Miranda | Portfolio</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navigation principale -->
+    <nav id="mainNav" class="main-nav">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="logo-gradient">HA.M</span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active" data-key="H">Accueil <kbd>H</kbd></a></li>
+                <li><a href="about.html" class="nav-link" data-key="A">À propos <kbd>A</kbd></a></li>
+                <li><a href="projects.html" class="nav-link" data-key="P">Projets <kbd>P</kbd></a></li>
+                <li><a href="contact.html" class="nav-link" data-key="C">Contact <kbd>C</kbd></a></li>
+            </ul>
+
+            <!-- Burger Menu Mobile -->
+            <button class="burger-menu" id="burgerMenu" aria-label="Menu de navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Section Hero/Accueil -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content fade-in">
+                
+                <!-- Avatar -->
+                <div class="hero-avatar">
+                    <div class="avatar-wrapper">
+                        <div class="avatar-gradient">
+                            <div class="avatar-inner">
+                                <img src="assets/img/profile.png" alt="Hugo Alves Miranda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="avatar-fallback">HA</div>
+                            </div>
+                        </div>
+                        <div class="status-indicator" title="Disponible pour un stage"></div>
+                    </div>
+                </div>
+
+                <!-- Titre principal -->
+                <div class="hero-title">
+                    <h1 class="main-title">
+                        <span class="gradient-text">Hugo Alves Miranda</span>
+                    </h1>
+                    <p class="subtitle">Étudiant BUT Informatique · Spécialisation Data</p>
+                </div>
+
+                <!-- Description -->
+                <p class="hero-description">
+                    Recherche de stage 14 semaines (02/03 - 06/07) en Data Analysis, Data Engineering ou Data Journalism
+                </p>
+
+                <!-- Compétences clés -->
+                <div class="skills-tags">
+                    <span class="skill-tag">SQL (MySQL, PostgreSQL)</span>
+                    <span class="skill-tag">Modélisation BDD</span>
+                    <span class="skill-tag">Scraping Python</span>
+                    <span class="skill-tag">Pipelines ETL</span>
+                </div>
+
+                <!-- Boutons d'action -->
+                <div class="hero-actions">
+                    <a href="projects.html" class="btn btn-primary">
+                        <span>Voir mes projets</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
+                    <a href="contact.html" class="btn btn-secondary">Me contacter</a>
+                </div>
+
+                <!-- Indication navigation clavier -->
+                <div class="keyboard-hint">
+                    <p>Navigation rapide:</p>
+                    <div class="keyboard-shortcuts">
+                        <kbd>H</kbd> Accueil
+                        <kbd>A</kbd> À propos
+                        <kbd>P</kbd> Projets
+                        <kbd>C</kbd> Contact
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Particules d'arrière-plan (optionnel) -->
+        <div class="particles" id="particles"></div>
+    </section>
+
+    <!-- Section Aperçu rapide -->
+    <section class="quick-overview">
+        <div class="container">
+            <div class="overview-grid">
+                
+                <!-- Formation -->
+                <div class="overview-card slide-up">
+                    <div class="card-icon purple">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 14L21 9L12 4L3 9L12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 9V15M12 14L3 9V13.5C3 15 5 17 12 17C19 17 21 15 21 13.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <h3>Formation</h3>
+                    <p>BUT Informatique</p>
+                    <p class="text-muted">Spécialisation Data</p>
+                    <p class="text-small">IUT Créteil-Vitry (UPEC)</p>
+                </div>
+
+                <!-- Expérience -->
+                <div class="overview-card slide-up" style="animation-delay: 0.1s;">
+                    <div class="card-icon cyan">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="7" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                            <path d="M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7" stroke="currentColor" stroke-width="2"/>
+                            <path d="M3 12H21" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Stage actuel</h3>
+                    <p>Laboratoire LISSI</p>
+                    <p class="text-muted">Pilotage Robot Go2</p>
+                    <p class="text-small">Avril-Juin 2025</p>
+                </div>
+
+                <!-- Langues -->
+                <div class="overview-card slide-up" style="animation-delay: 0.2s;">
+                    <div class="card-icon purple">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                            <path d="M2 12H22M12 2C14.5 4.5 16 8.5 16 12C16 15.5 14.5 19.5 12 22M12 2C9.5 4.5 8 8.5 8 12C8 15.5 9.5 19.5 12 22" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Langues</h3>
+                    <p>Anglais · Courant</p>
+                    <p>Portugais · Courant</p>
+                    <p class="text-muted">Espagnol · Intermédiaire</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Hugo Alves Miranda · Étudiant BUT Informatique</p>
+                <p class="text-muted">Conçu avec passion à Paris</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/navigation.js"></script>
+    <script src="js/keyboard-nav.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/particles.js"></script>
+    
+</body>
+</html>
