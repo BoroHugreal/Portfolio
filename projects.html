@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projets de Hugo Alves Miranda - Data Analysis, ETL, Web Development">
+    <meta name="keywords" content="Projets Data, ETL, Scraping, Portfolio, Python, SQL">
+    <meta name="author" content="Hugo Alves Miranda">
+    <title>Projets | Hugo Alves Miranda</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fonts Google -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="dark-theme">
+    
+    <!-- Navigation principale -->
+    <nav id="mainNav" class="main-nav">
+        <div class="container nav-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo">
+                <span class="logo-gradient">HA.M</span>
+            </a>
+
+            <!-- Menu Desktop -->
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-key="H">Accueil <kbd>H</kbd></a></li>
+                <li><a href="about.html" class="nav-link" data-key="A">À propos <kbd>A</kbd></a></li>
+                <li><a href="projects.html" class="nav-link active" data-key="P">Projets <kbd>P</kbd></a></li>
+                <li><a href="contact.html" class="nav-link" data-key="C">Contact <kbd>C</kbd></a></li>
+            </ul>
+
+            <!-- Burger Menu Mobile -->
+            <button class="burger-menu" id="burgerMenu" aria-label="Menu de navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header de la page -->
+    <section class="page-header">
+        <div class="container">
+            <div class="header-content fade-in">
+                <h1 class="page-title">
+                    <span class="gradient-text">Mes Projets</span>
+                </h1>
+                <p class="page-subtitle">Une sélection de mes réalisations académiques et personnelles</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres de projets -->
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-wrapper">
+                <button class="filter-btn active" data-filter="all">
+                    <span>Tous</span>
+                </button>
+                <button class="filter-btn" data-filter="data">
+                    <span>Data</span>
+                </button>
+                <button class="filter-btn" data-filter="web">
+                    <span>Web</span>
+                </button>
+                <button class="filter-btn" data-filter="ia">
+                    <span>IA</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Grille de projets -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="projects-grid">
+
+                <!-- Projet 1: Scraping & Entrepôt -->
+                <article class="project-card slide-up" data-category="data ia">
+                    <div class="project-image">
+                        <div class="project-image-placeholder purple-gradient">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M7 10H7.01M7 14H7.01M11 10H17M11 14H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Scraping</span>
+                                <span class="tag">NoSQL</span>
+                                <span class="tag">RAG</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Entrepôt de ressources pédagogiques & Agent IA</h3>
+                            <span class="project-year">2025-2026</span>
+                        </div>
+                        
+                        <p class="project-description">
+                            Extraction automatisée de ressources pédagogiques (sites web, PDF) avec normalisation et stockage dans bases relationnelles et NoSQL. Création d'un entrepôt de données hybride (vectoriel + graphe) avec indexation et catégorisation.
+                        </p>
+
+                        <div class="project-features">
+                            <h4>Fonctionnalités clés :</h4>
+                            <ul>
+                                <li>Pipeline RAG (Retrieval-Augmented Generation)</li>
+                                <li>Agent IA de recommandation personnalisée</li>
+                                <li>Architecture complète : ingestion, API, base multimodèle</li>
+                                <li>Moteur de workflows avec auditabilité</li>
+                                <li>CI/CD et démonstrations techniques</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-footer">
+                            <button class="btn btn-secondary btn-small">
+                                <span>Voir détails</span>
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projet 2: Données Météo -->
+                <article class="project-card slide-up" data-category="data web" style="animation-delay: 0.1s;">
+                    <div class="project-image">
+                        <div class="project-image-placeholder cyan-gradient">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2V6M12 18V22M4.93 4.93L7.76 7.76M16.24 16.24L19.07 19.07M2 12H6M18 12H22M4.93 19.07L7.76 16.24M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-tags">
+                                <span class="tag">MySQL</span>
+                                <span class="tag">Python</span>
+                                <span class="tag">PHP</span>
+                                <span class="tag">API</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Analyse et Exploitation de Données Météorologiques</h3>
+                            <span class="project-year">2024-2025</span>
+                        </div>
+                        
+                        <p class="project-description">
+                            Conception d'une base de données relationnelle MySQL pour le stockage et l'analyse de données météorologiques. Intégration automatique via l'API SYNOP avec pipelines d'import et interface web dynamique.
+                        </p>
+
+                        <div class="project-features">
+                            <h4>Réalisations techniques :</h4>
+                            <ul>
+                                <li>Modélisation complète et normalisation BDD</li>
+                                <li>Intégration API SYNOP avec Python</li>
+                                <li>Procédures stockées et optimisation requêtes</li>
+                                <li>Interface web (PHP MVC) avec dashboards interactifs</li>
+                                <li>Requêtes AJAX/JS pour filtrage temps réel</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-footer">
+                            <button class="btn btn-secondary btn-small">
+                                <span>Voir détails</span>
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projet 3: Robot Go2 -->
+                <article class="project-card slide-up" data-category="web ia" style="animation-delay: 0.2s;">
+                    <div class="project-image">
+                        <div class="project-image-placeholder purple-gradient">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                                <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="9" cy="9" r="1.5" fill="currentColor"/>
+                                <circle cx="15" cy="9" r="1.5" fill="currentColor"/>
+                                <path d="M9 15C9 15 10 16 12 16C14 16 15 15 15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-tags">
+                                <span class="tag">MQTT</span>
+                                <span class="tag">Web</span>
+                                <span class="tag">Temps Réel</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Interface de pilotage Robot Go2</h3>
+                            <span class="project-year">Avril-Juin 2025</span>
+                        </div>
+                        
+                        <p class="project-description">
+                            Développement d'une interface web de contrôle pour le robot quadrupède Go2 au Laboratoire LISSI. Communication temps réel via protocole MQTT avec supervision vidéo embarquée.
+                        </p>
+
+                        <div class="project-features">
+                            <h4>Technologies et fonctionnalités :</h4>
+                            <ul>
+                                <li>Communication MQTT bidirectionnelle</li>
+                                <li>Streaming vidéo en temps réel</li>
+                                <li>Gestion des trajectoires et commandes</li>
+                                <li>Architecture de contrôle robuste</li>
+                                <li>Documentation technique complète</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-footer">
+                            <span class="project-status">
+                                <span class="status-dot active"></span>
+                                Stage en cours
+                            </span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Projet 4: Dashboard Power BI (exemple) -->
+                <article class="project-card slide-up" data-category="data" style="animation-delay: 0.3s;">
+                    <div class="project-image">
+                        <div class="project-image-placeholder cyan-gradient">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-tags">
+                                <span class="tag">Power BI</span>
+                                <span class="tag">Visualisation</span>
+                                <span class="tag">Reporting</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Tableaux de bord interactifs</h3>
+                            <span class="project-year">2024</span>
+                        </div>
+                        
+                        <p class="project-description">
+                            Création de dashboards Power BI pour la visualisation et l'analyse de données complexes. Développement de rapports interactifs avec KPIs, graphiques dynamiques et filtres personnalisés.
+                        </p>
+
+                        <div class="project-features">
+                            <h4>Compétences développées :</h4>
+                            <ul>
+                                <li>Modélisation de données relationnelles</li>
+                                <li>Création de mesures DAX avancées</li>
+                                <li>Design de visualisations intuitives</li>
+                                <li>Optimisation des performances</li>
+                            </ul>
+                        </div>
+
+                        <div class="project-footer">
+                            <button class="btn btn-secondary btn-small">
+                                <span>Voir détails</span>
+                                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                                    <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Technologies utilisées -->
+    <section class="tech-stack-section">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="gradient-text">Technologies maîtrisées</span>
+            </h2>
+            
+            <div class="tech-grid">
+                <div class="tech-item slide-up">
+                    <div class="tech-icon">🐍</div>
+                    <span>Python</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.05s;">
+                    <div class="tech-icon">🗄️</div>
+                    <span>SQL</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.1s;">
+                    <div class="tech-icon">🐘</div>
+                    <span>PHP</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.15s;">
+                    <div class="tech-icon">⚡</div>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.2s;">
+                    <div class="tech-icon">🐋</div>
+                    <span>Docker</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.25s;">
+                    <div class="tech-icon">📊</div>
+                    <span>Power BI</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.3s;">
+                    <div class="tech-icon">🔗</div>
+                    <span>API REST</span>
+                </div>
+                <div class="tech-item slide-up" style="animation-delay: 0.35s;">
+                    <div class="tech-icon">🌐</div>
+                    <span>HTML/CSS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content fade-in">
+                <h2>Un projet en tête ?</h2>
+                <p>Discutons de vos besoins en Data Analysis ou Data Engineering</p>
+                <div class="cta-actions">
+                    <a href="contact.html" class="btn btn-primary btn-large">Me contacter</a>
+                    <a href="about.html" class="btn btn-secondary btn-large">En savoir plus</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Hugo Alves Miranda · Étudiant BUT Informatique</p>
+                <p class="text-muted">Conçu avec passion à Paris</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/navigation.js"></script>
+    <script src="js/keyboard-nav.js"></script>
+    <script src="js/animations.js"></script>
+    <script src="js/project-filters.js"></script>
+    
+</body>
+</html>
