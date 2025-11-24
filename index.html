@@ -20,38 +20,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <style>
-        /* Correction pour l'avatar qui ne doit pas tourner */
-        .avatar-wrapper .avatar-gradient {
-            animation: none !important;
-        }
-        
-        /* L'image elle-même ne doit pas tourner */
-        .avatar-inner {
-            animation: none !important;
-        }
-        
-        /* Seule la bordure doit tourner */
-        .avatar-border-rotate {
-            position: absolute;
-            inset: -4px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            animation: rotate 8s linear infinite;
-            z-index: 0;
-        }
-        
-        .avatar-wrapper {
-            position: relative;
-        }
-        
-        .avatar-gradient {
-            position: relative;
-            z-index: 1;
-            background: var(--color-bg);
-        }
-    </style>
 </head>
 <body class="dark-theme">
     
@@ -82,13 +50,61 @@
 
     <!-- Section Hero/Accueil -->
     <section class="hero-section">
+        <!-- Particules d'arrière-plan -->
+        <div class="particles" id="particles-bg"></div>
+        
         <div class="container">
-            <div class="hero-content fade-in">
+            <div class="hero-content-wrapper fade-in">
                 
-                <!-- Avatar avec bordure tournante uniquement -->
+                <!-- Contenu texte à gauche -->
+                <div class="hero-text-content">
+                    <!-- Titre principal -->
+                    <div class="hero-title">
+                        <h1 class="main-title">
+                            <span class="gradient-text">Hugo Alves Miranda</span>
+                        </h1>
+                        <p class="subtitle">Étudiant BUT Informatique · Spécialisation Data</p>
+                    </div>
+
+                    <!-- Description -->
+                    <p class="hero-description">
+                        Passionné par l'analyse de données et le développement, je conçois des solutions techniques alliant bases de données, automatisation et visualisation.
+                    </p>
+
+                    <!-- Compétences clés -->
+                    <div class="skills-tags">
+                        <span class="skill-tag">SQL & Bases de données</span>
+                        <span class="skill-tag">Python & Automatisation</span>
+                        <span class="skill-tag">Pipelines ETL</span>
+                        <span class="skill-tag">Développement Web</span>
+                    </div>
+
+                    <!-- Boutons d'action -->
+                    <div class="hero-actions">
+                        <a href="projects.html" class="btn btn-primary">
+                            <span>Découvrir mes projets</span>
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="about.html" class="btn btn-secondary">En savoir plus</a>
+                    </div>
+
+                    <!-- Indication navigation clavier -->
+                    <div class="keyboard-hint">
+                        <p>Navigation rapide au clavier :</p>
+                        <div class="keyboard-shortcuts">
+                            <kbd>H</kbd> Accueil
+                            <kbd>A</kbd> À propos
+                            <kbd>P</kbd> Projets
+                            <kbd>C</kbd> Contact
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Avatar à droite -->
                 <div class="hero-avatar">
                     <div class="avatar-wrapper">
-                        <div class="avatar-border-rotate"></div>
                         <div class="avatar-gradient">
                             <div class="avatar-inner">
                                 <img src="assets/img/profile.png" alt="Hugo Alves Miranda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -99,56 +115,9 @@
                     </div>
                 </div>
 
-                <!-- Titre principal -->
-                <div class="hero-title">
-                    <h1 class="main-title">
-                        <span class="gradient-text">Hugo Alves Miranda</span>
-                    </h1>
-                    <p class="subtitle">Étudiant BUT Informatique · Spécialisation Data</p>
-                </div>
-
-                <!-- Description -->
-                <p class="hero-description">
-                    Passionné par l'analyse de données et le développement, je conçois des solutions techniques alliant bases de données, automatisation et visualisation.
-                </p>
-
-                <!-- Compétences clés -->
-                <div class="skills-tags">
-                    <span class="skill-tag">SQL & Bases de données</span>
-                    <span class="skill-tag">Python & Automatisation</span>
-                    <span class="skill-tag">Pipelines ETL</span>
-                    <span class="skill-tag">Développement Web</span>
-                </div>
-
-                <!-- Boutons d'action -->
-                <div class="hero-actions">
-                    <a href="projects.html" class="btn btn-primary">
-                        <span>Découvrir mes projets</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </a>
-                    <a href="about.html" class="btn btn-secondary">En savoir plus</a>
-                </div>
-
-                <!-- Indication navigation clavier -->
-                <div class="keyboard-hint">
-                    <p>Navigation rapide au clavier :</p>
-                    <div class="keyboard-shortcuts">
-                        <kbd>H</kbd> Accueil
-                        <kbd>A</kbd> À propos
-                        <kbd>P</kbd> Projets
-                        <kbd>C</kbd> Contact
-                    </div>
-                </div>
-
             </div>
         </div>
-
-        <!-- Particules d'arrière-plan (optionnel) -->
-        <!-- Dans votre HTML (généralement index.html ou le layout principal) -->
-        <!-- Ajouter ce conteneur au début du body, avant tout autre contenu -->
-        <div class="particles" id="particles-bg"></div>    </section>
+    </section>
 
     <!-- Section Aperçu rapide -->
     <section class="quick-overview">
