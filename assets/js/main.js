@@ -171,7 +171,8 @@
     if (!veil) return;
     document.addEventListener("click", (e) => {
       const a = e.target.closest("a.js-nav");
-      if (!a || a.target === "_blank" || e.metaKey || e.ctrlKey) return;
+      // on laisse le navigateur gérer : nouvel onglet/fenêtre, clic non-gauche, modificateurs
+      if (!a || a.target === "_blank" || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
       const href = a.getAttribute("href");
       if (!href || href.startsWith("#") || href.startsWith("http") || href.startsWith("mailto") || href.startsWith("tel")) return;
       e.preventDefault();
@@ -250,6 +251,14 @@
     }
   }
 
+  /* ---------- Actions génériques (remplace les scripts inline → CSP stricte) ---------- */
+  function wireGenericActions() {
+    document.addEventListener("click", (e) => {
+      if (e.target.closest("[data-open-chat]")) { e.preventDefault(); $("#chatFab")?.click(); }
+      if (e.target.closest("[data-print]")) { e.preventDefault(); window.print(); }
+    });
+  }
+
   /* ---------- Année dans le footer ---------- */
   function wireYear() { $$("[data-year]").forEach((e) => (e.textContent = new Date().getFullYear())); }
 
@@ -261,9 +270,13 @@
   }
   addEventListener("load", () => setTimeout(forceUnlock, 4000));
 
+  /* ---------- E2 : filets globaux d'erreurs ---------- */
+  addEventListener("error", (e) => { console.warn("[error]", e.message || e); forceUnlock(); });
+  addEventListener("unhandledrejection", (e) => { console.warn("[promise]", (e && e.reason) || e); });
+
   /* ---------- Boot ---------- */
   document.addEventListener("DOMContentLoaded", () => {
-    const steps = [injectHUD, wireSounds, wireToggles, wireNav, wireReveal, wireMiniMap, wirePageTransitions, wireAchievements, wireKonami, wireYear];
+    const steps = [injectHUD, wireSounds, wireToggles, wireNav, wireReveal, wireMiniMap, wirePageTransitions, wireAchievements, wireKonami, wireGenericActions, wireYear];
     steps.forEach((fn) => { try { fn(); } catch (e) { console.warn("[HUD]", fn.name, e); } });
     try { runLoader(); } catch (e) { forceUnlock(); }
   });

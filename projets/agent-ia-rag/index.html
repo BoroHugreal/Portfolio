@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-base="../../">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://api.open-meteo.com https://formspree.io; form-action 'self' https://formspree.io; upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Assistant IA pédagogique (RAG hybride) — Hugo Alves Miranda</title>
   <meta name="description" content="Projet 1 — Assistant conversationnel sur base documentaire spécialisée : pipeline ETL, recherche hybride BM25 + Qdrant, LLM via Ollama." />
   <meta property="og:type" content="article" />
@@ -21,7 +23,6 @@
   <link rel="icon" type="image/svg+xml" href="../../assets/img/favicon.svg" />
   <link rel="stylesheet" href="../../assets/css/fonts.css" />
   <link rel="stylesheet" href="../../assets/css/style.css" />
-  <script>window.SITE_BASE = "../../";</script>
 </head>
 <body class="locked">
 
@@ -146,7 +147,7 @@
           <div class="aside-card panel reveal d3" style="border-color:var(--accent)">
             <h3>Démo live</h3>
             <p class="muted" style="font-size:.92rem;margin-bottom:14px">Le <b style="color:var(--accent)">chatbot</b> de ce site est une démo de ce projet : un mini-RAG qui récupère ses réponses dans le contenu réel du portfolio via un scoring BM25.</p>
-            <button class="btn btn--primary btn--sm" id="openChatDemo" type="button">
+            <button class="btn btn--primary btn--sm" type="button" data-open-chat>
               <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.4 8.4 0 0 1-12 7.6L3 21l1.9-5.6A8.4 8.4 0 1 1 21 11.5z"/></svg>
               Tester la com tactique
             </button>
@@ -166,8 +167,5 @@
   <script src="../../assets/js/knowledge-base.js"></script>
   <script src="../../assets/js/chatbot.js"></script>
   <script src="../../assets/js/main.js"></script>
-  <script>
-    document.getElementById("openChatDemo")?.addEventListener("click", () => document.getElementById("chatFab")?.click());
-  </script>
 </body>
 </html>

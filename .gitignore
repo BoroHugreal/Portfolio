@@ -1,0 +1,17 @@
+# Documents privés — NE PAS publier (le CV reste public, lui)
+assets/docs/LM_ALVESMIRANDA.pdf
+cahier_des_charges_portfolio_hugo.pdf
+
+# OS / éditeurs
+.DS_Store
+Thumbs.db
+desktop.ini
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs / temporaires
+*.log
+npm-debug.log*
+.cache/

@@ -41,19 +41,24 @@
       }
 
       btn.disabled = true; setStatus("Transmission en cours…", "busy");
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), 10000);       // R1 : timeout réseau
       try {
         const res = await fetch(endpoint, {
           method: "POST",
           headers: { "Accept": "application/json" },
           body: new FormData(form),
+          signal: ctrl.signal,
         });
         if (!res.ok) throw new Error("HTTP " + res.status);
         form.reset(); form.classList.add("sent");
         setStatus("Message transmis ✓ Réponse sous 48 h.", "ok");
       } catch (err) {
-        setStatus("Échec réseau — bascule sur l'email…", "err");
+        const aborted = err && err.name === "AbortError";
+        setStatus((aborted ? "Délai dépassé" : "Échec réseau") + " — bascule sur l'email…", "err");
         mailtoFallback(name, email, message);
       } finally {
+        clearTimeout(timer);
         btn.disabled = false;
       }
     });

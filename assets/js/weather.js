@@ -52,39 +52,52 @@
       </svg>`;
   }
 
+  // Coercition sûre : arrondi si fini, sinon tiret (évite "NaN"/"undefined" à l'écran)
+  const r = (v) => (Number.isFinite(+v) ? Math.round(+v) : "—");
+  const n = (v) => (Number.isFinite(+v) ? +v : "—");
+
   async function load(host, city) {
     host.querySelector("#wxBody").innerHTML = '<div class="weather__err">📡 Acquisition des données…</div>';
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}` +
       `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,apparent_temperature,weather_code` +
       `&hourly=temperature_2m&forecast_days=1&timezone=auto`;
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 9000);          // R1 : pas d'attente infinie
     try {
-      const res = await fetch(url);
+      const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
       const d = await res.json();
-      const cur = d.current;
+      const cur = d && d.current;
+      if (!cur) throw new Error("réponse météo incomplète");
       const [label, icon] = cond(cur.weather_code);
-      const temps = (d.hourly && d.hourly.temperature_2m) ? d.hourly.temperature_2m.slice(0, 24) : [cur.temperature_2m];
+      // S4/R4 : on ne garde que des nombres finis pour la courbe
+      let temps = (d.hourly && Array.isArray(d.hourly.temperature_2m) ? d.hourly.temperature_2m : [])
+        .map(Number).filter(Number.isFinite).slice(0, 24);
+      if (!temps.length && Number.isFinite(+cur.temperature_2m)) temps = [+cur.temperature_2m];
       host.querySelector("#wxBody").innerHTML = `
         <div class="weather__grid">
           <div class="weather__now">
             <div class="city">📍 ${city.name}</div>
-            <div class="temp">${Math.round(cur.temperature_2m)}<span class="deg">°C</span></div>
+            <div class="temp">${r(cur.temperature_2m)}<span class="deg">°C</span></div>
             <div class="cond">${icon} ${label}</div>
             <div class="weather__metrics">
-              <div><div class="v">${Math.round(cur.apparent_temperature)}°</div><div class="k">Ressenti</div></div>
-              <div><div class="v">${cur.relative_humidity_2m}%</div><div class="k">Humidité</div></div>
-              <div><div class="v">${Math.round(cur.wind_speed_10m)}</div><div class="k">Vent km/h</div></div>
+              <div><div class="v">${r(cur.apparent_temperature)}°</div><div class="k">Ressenti</div></div>
+              <div><div class="v">${n(cur.relative_humidity_2m)}%</div><div class="k">Humidité</div></div>
+              <div><div class="v">${r(cur.wind_speed_10m)}</div><div class="k">Vent km/h</div></div>
             </div>
           </div>
           <div class="weather__chart">
             <div class="lbl">Température · prochaines 24 h</div>
-            ${sparkline(temps)}
+            ${temps.length ? sparkline(temps) : '<div class="muted" style="padding:14px 0">Courbe indisponible</div>'}
           </div>
         </div>`;
       window.Ach && window.Ach.unlock("meteo", "Overlay météo activé");
     } catch (e) {
+      const aborted = e && e.name === "AbortError";
       host.querySelector("#wxBody").innerHTML =
-        `<div class="weather__err">⚠️ Données indisponibles (hors-ligne ou API injoignable).<br/><small class="muted">Le projet réel s'appuie sur l'API SYNOP via un backend PHP.</small></div>`;
+        `<div class="weather__err">⚠️ ${aborted ? "Délai dépassé" : "Données indisponibles"} (hors-ligne ou API injoignable).<br/><small class="muted">Le projet réel s'appuie sur l'API SYNOP via un backend PHP.</small></div>`;
+    } finally {
+      clearTimeout(timer);
     }
   }
 

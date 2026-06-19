@@ -6,7 +6,7 @@
    ================================================================= */
 (function () {
   "use strict";
-  const BASE = window.SITE_BASE || "";
+  const BASE = document.documentElement.getAttribute("data-base") || window.SITE_BASE || "";
   const KB = window.KB || [];
 
   /* ---------- NLP minimal (FR) ---------- */
@@ -135,8 +135,14 @@
         scroll();
       }, 420 + Math.random() * 360);
     }
+    function addUser(text) {
+      const m = document.createElement("div");
+      m.className = "msg user";
+      m.textContent = text;                 // S3 : message utilisateur jamais interprété comme HTML
+      log.appendChild(m); scroll(); return m;
+    }
     function ask(q) {
-      add(q.replace(/</g, "&lt;"), "user");
+      addUser(q);
       respond(q);
       sugg.classList.add("hide");
     }

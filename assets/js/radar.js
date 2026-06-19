@@ -59,6 +59,8 @@
     if (prefersReduced) return;
     const poly = svg.querySelector("#radarPoly");
     const dots = svg.querySelectorAll(".radar-dot");
+    const showFull = () => { poly.setAttribute("points", full); dots.forEach((d) => (d.style.opacity = "1")); };
+    if (!("IntersectionObserver" in window)) { showFull(); return; }   // R2 : pas d'IO → on dessine plein
     const io = new IntersectionObserver((ents) => {
       ents.forEach((en) => {
         if (en.isIntersecting) {
@@ -84,5 +86,8 @@
     bars.forEach((b) => io.observe(b));
   }
 
-  document.addEventListener("DOMContentLoaded", () => { renderRadar(); animateRanks(); });
+  document.addEventListener("DOMContentLoaded", () => {
+    try { renderRadar(); } catch (e) { console.warn("[radar]", e); }
+    try { animateRanks(); } catch (e) { console.warn("[ranks]", e); }
+  });
 })();

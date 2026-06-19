@@ -29,6 +29,9 @@ jobs:
       - name: Configurer Pages
         uses: actions/configure-pages@v5
 
+      - name: Retirer les fichiers privés du site publié
+        run: rm -f cahier_des_charges_portfolio_hugo.pdf assets/docs/LM_ALVESMIRANDA.pdf
+
       - name: Empaqueter le site (racine du dépôt)
         uses: actions/upload-pages-artifact@v3
         with:

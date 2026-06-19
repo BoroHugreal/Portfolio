@@ -105,12 +105,22 @@ Pour suivre les visites sans cookies ni RGPD lourd, ajouter dans le `<head>` (ex
 <script defer data-domain="borohugreal.github.io" src="https://plausible.io/js/script.js"></script>
 ```
 
+> ⚠️ Une **CSP stricte** est active sur chaque page (`script-src 'self'`). Pour autoriser un script externe (analytics) ou un autre service de formulaire, ajoute son domaine à `script-src`/`connect-src` dans la balise `<meta http-equiv="Content-Security-Policy">`.
+
 ## ♿ Accessibilité & perf
 
 - Contours de focus clavier (`:focus-visible`) sur tous les éléments interactifs.
 - `prefers-reduced-motion` respecté (animations coupées, curseur réticule désactivé).
 - Polices **auto-hébergées** (woff2, `font-display: swap`) → zéro requête externe, rendu hors-ligne.
 - Curseur réticule et sons d'interface uniquement sur pointeur fin ; sons **désactivés par défaut**.
+
+## 🛡️ Sécurité & robustesse
+
+- **CSP stricte** par page (`script-src 'self'`, `object-src 'none'`) + `referrer-policy`.
+- Aucun script inline, aucune dépendance/CDN tiers, zéro secret.
+- `fetch` avec **timeout** (AbortController) et repli propre ; entrées chatbot en `textContent` ; valeurs d'API coercées.
+- Boot tolérant aux pannes + filets globaux d'erreurs → la page ne reste jamais bloquée sur le loader.
+- Fichiers privés (`LM_*.pdf`, cahier des charges) exclus du dépôt et du déploiement (`.gitignore` + purge CI). *Si le dépôt a déjà été poussé publiquement, purger aussi l'historique Git (`git filter-repo`).*
 
 ## 🛠️ Stack
 
