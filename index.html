@@ -1,226 +1,463 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio de Hugo Alves Miranda - Étudiant BUT Informatique spécialisation Data">
-    <meta name="keywords" content="Data Analyst, Data Engineering, BUT Informatique, Portfolio">
-    <meta name="author" content="Hugo Alves Miranda">
-    <title>Hugo Alves Miranda | Portfolio</title>
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    
-    <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/animations.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    
-    <!-- Fonts Google -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hugo Alves Miranda — Agent Data / ML</title>
+  <meta name="description" content="Portfolio d'Hugo Alves Miranda — étudiant Data, futur ingénieur Big Data & Machine Learning. Recherche alternance 3 ans à partir de septembre 2026." />
+  <meta name="author" content="Hugo Alves Miranda" />
+  <meta property="og:title" content="Hugo Alves Miranda — Agent Data / ML" />
+  <meta property="og:description" content="Étudiant Data, futur ingénieur Big Data & Machine Learning. Portfolio interactif (RAG, météo live) à direction artistique FPS tactique." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hugo Alves Miranda — Portfolio" />
+  <meta property="og:locale" content="fr_FR" />
+  <link rel="canonical" href="https://borohugreal.github.io/Portfolio/" />
+  <meta property="og:url" content="https://borohugreal.github.io/Portfolio/" />
+  <meta property="og:image" content="https://borohugreal.github.io/Portfolio/assets/img/og-cover.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Hugo Alves Miranda — Agent Data / ML" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hugo Alves Miranda — Agent Data / ML" />
+  <meta name="twitter:description" content="Étudiant Data, futur ingénieur Big Data & Machine Learning. Portfolio interactif (RAG, météo live)." />
+  <meta name="twitter:image" content="https://borohugreal.github.io/Portfolio/assets/img/og-cover.png" />
+  <meta name="theme-color" content="#0A0E14" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/fonts.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <script>window.SITE_BASE = "";</script>
 </head>
-<body class="dark-theme">
-    
-    <!-- Navigation principale -->
-    <nav id="mainNav" class="main-nav">
-        <div class="container nav-container">
-            <!-- Logo -->
-            <a href="index.html" class="logo">
-                <span class="logo-gradient">HA.M</span>
-            </a>
+<body class="locked">
 
-            <!-- Menu Desktop -->
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link active" data-key="H">Accueil <kbd>H</kbd></a></li>
-                <li><a href="about.html" class="nav-link" data-key="A">À propos <kbd>A</kbd></a></li>
-                <li><a href="projects.html" class="nav-link" data-key="P">Projets <kbd>P</kbd></a></li>
-                <li><a href="contact.html" class="nav-link" data-key="C">Contact <kbd>C</kbd></a></li>
-            </ul>
+  <!-- ÉCRAN DE CHARGEMENT -->
+  <div class="loader" id="loader">
+    <div class="loader__logo">HUGO<span class="hl">//</span>AM</div>
+    <div class="loader__bar"><i></i></div>
+    <div class="loader__pct">CHARGEMENT 0%</div>
+    <p class="loader__tip">Initialisation de l'interface tactique…</p>
+  </div>
 
-            <!-- Burger Menu Mobile -->
-            <button class="burger-menu" id="burgerMenu" aria-label="Menu de navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
+  <!-- BARRE HUD -->
+  <header class="hud-top">
+    <a class="brand" href="#accueil" aria-label="Accueil">
+      <span class="tag">AM</span>
+      <span class="who">HUGO ALVES MIRANDA<small>DATA / MACHINE LEARNING</small></span>
+    </a>
+    <nav class="nav" aria-label="Navigation principale">
+      <a href="#lore">Lore</a>
+      <a href="#parcours">Parcours</a>
+      <a href="#missions">Missions</a>
+      <a href="#projets">Cartes</a>
+      <a href="#competences">Loadout</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <div class="hud-actions">
+      <a class="btn btn--sm btn--primary js-nav" href="cv/">Dossier&nbsp;CV</a>
+      <button class="icon-btn" id="sfxToggle" aria-pressed="false" title="Son d'interface" aria-label="Activer le son d'interface">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
+      </button>
+      <button class="icon-btn on" id="fxToggle" title="Ambiance écran" aria-label="Activer l'ambiance écran">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M3 13h18M8 21h8"/></svg>
+      </button>
+      <button class="icon-btn burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
 
-    <!-- Section Hero/Accueil -->
-    <section class="hero-section">
-        <!-- Particules d'arrière-plan -->
-        <div class="particles" id="particles-bg"></div>
-        
-        <div class="container">
-            <div class="hero-content-wrapper fade-in">
-                
-                <!-- Contenu texte à gauche -->
-                <div class="hero-text-content">
-                    <!-- Titre principal -->
-                    <div class="hero-title">
-                        <h1 class="main-title">
-                            <span class="gradient-text">Hugo Alves Miranda</span>
-                        </h1>
-                        <p class="subtitle">Étudiant BUT Informatique · Spécialisation Data</p>
-                    </div>
+  <!-- MENU MOBILE -->
+  <nav class="mnav" id="mnav" aria-label="Menu mobile">
+    <a href="#accueil"><span class="n">00</span> Accueil</a>
+    <a href="#lore"><span class="n">01</span> Lore</a>
+    <a href="#parcours"><span class="n">02</span> Parcours</a>
+    <a href="#missions"><span class="n">03</span> Missions</a>
+    <a href="#projets"><span class="n">04</span> Cartes</a>
+    <a href="#competences"><span class="n">05</span> Loadout</a>
+    <a href="#contact"><span class="n">06</span> Contact</a>
+    <a class="js-nav" href="cv/"><span class="n">→</span> Dossier CV</a>
+  </nav>
 
-                    <!-- Description -->
-                    <p class="hero-description">
-                        Passionné par l'analyse de données et le développement, je conçois des solutions techniques alliant bases de données, automatisation et visualisation.
-                    </p>
-
-                    <!-- Compétences clés -->
-                    <div class="skills-tags">
-                        <span class="skill-tag">SQL & Bases de données</span>
-                        <span class="skill-tag">Python & Automatisation</span>
-                        <span class="skill-tag">Pipelines ETL</span>
-                        <span class="skill-tag">Développement Web</span>
-                    </div>
-
-                    <!-- Boutons d'action -->
-                    <div class="hero-actions">
-                        <a href="projects.html" class="btn btn-primary">
-                            <span>Découvrir mes projets</span>
-                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                                <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </a>
-                        <a href="about.html" class="btn btn-secondary">En savoir plus</a>
-                    </div>
-
-                    <!-- Indication navigation clavier -->
-                    <div class="keyboard-hint">
-                        <p>Navigation rapide au clavier :</p>
-                        <div class="keyboard-shortcuts">
-                            <kbd>H</kbd> Accueil
-                            <kbd>A</kbd> À propos
-                            <kbd>P</kbd> Projets
-                            <kbd>C</kbd> Contact
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Avatar à droite -->
-                <div class="hero-avatar">
-                    <div class="avatar-wrapper">
-                        <div class="avatar-gradient">
-                            <div class="avatar-inner">
-                                <img src="assets/img/profile.png" alt="Hugo Alves Miranda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                <div class="avatar-fallback">HA</div>
-                            </div>
-                        </div>
-                        <div class="status-indicator" title="Étudiant actif"></div>
-                    </div>
-                </div>
-
-            </div>
+  <main>
+    <!-- ============ HERO / AGENT SELECT ============ -->
+    <section class="hero" id="accueil" data-section="Accueil">
+      <div class="hero__bg"></div>
+      <div class="wrap hero__inner">
+        <div class="hero__copy">
+          <div class="hero__role reveal"><span class="kicker"><span class="idx">//</span> Écran de sélection d'agent</span></div>
+          <h1 class="hero__name reveal d1">HUGO ALVES<span class="hl">MIRANDA</span></h1>
+          <p class="hero__line reveal d2">Étudiant Data <span class="arrow">→</span> Futur Ingénieur Big&nbsp;Data &amp; Machine&nbsp;Learning</p>
+          <p class="hero__desc reveal d2">Admis en cycle ingénieur Big Data &amp; ML à l'EFREI Paris, je recherche une <strong>alternance de 3&nbsp;ans</strong> (rythme 1 semaine entreprise / 1 semaine école) à partir de <strong>septembre 2026</strong>.</p>
+          <div class="hero__cta reveal d3">
+            <a class="btn btn--primary js-nav" href="cv/">
+              <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+              Récupérer le dossier (CV)
+            </a>
+            <a class="btn" href="#contact">Inviter l'agent</a>
+            <a class="btn btn--ghost" href="#projets">Voir les missions</a>
+          </div>
+          <div class="hero__quickstats reveal d4">
+            <div class="qstat"><div class="v">2</div><div class="k">Missions accomplies</div></div>
+            <div class="qstat"><div class="v">2</div><div class="k">Projets data phares</div></div>
+            <div class="qstat"><div class="v">3</div><div class="k">Langues parlées</div></div>
+            <div class="qstat"><div class="v">09·26</div><div class="k">Disponible</div></div>
+          </div>
         </div>
+
+        <aside class="agent-card panel reveal d2" aria-label="Carte d'identité de l'agent">
+          <div class="agent-card__top"><span>Dossier&nbsp;agent</span><span class="role-tag">// Data&nbsp;/&nbsp;ML</span></div>
+          <div class="agent-card__media">
+            <img src="assets/img/profile.png" alt="Portrait d'Hugo Alves Miranda" loading="eager" />
+            <div class="agent-card__name"><b>Hugo A.M</b><span>Data Engineer · Analyst</span></div>
+          </div>
+          <div class="agent-card__foot">
+            <div><div class="v">DATA/ML</div><div class="k">Rôle</div></div>
+            <div><div class="v">PARIS</div><div class="k">Secteur</div></div>
+            <div><div class="v">09·26</div><div class="k">Dispo</div></div>
+          </div>
+        </aside>
+      </div>
+      <div class="wrap"><div class="scroll-hint reveal"><span class="mouse"></span> Scroll pour explorer le dossier</div></div>
     </section>
 
-    <!-- Section Aperçu rapide -->
-    <section class="quick-overview">
-        <div class="container">
-            <h2 class="section-title">Aperçu</h2>
-            <div class="overview-grid">
-                
-                <!-- Formation -->
-                <div class="overview-card slide-up">
-                    <div class="card-icon purple">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 14L21 9L12 4L3 9L12 14Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M21 9V15M12 14L3 9V13.5C3 15 5 17 12 17C19 17 21 15 21 13.5V9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Formation</h3>
-                    <p>BUT Informatique</p>
-                    <p class="text-muted">Spécialisation Data Science</p>
-                    <p class="text-small">IUT Créteil-Vitry (UPEC) · 2023-2026</p>
-                </div>
-
-                <!-- Expérience récente -->
-                <div class="overview-card slide-up" style="animation-delay: 0.1s;">
-                    <div class="card-icon cyan">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <rect x="3" y="7" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7" stroke="currentColor" stroke-width="2"/>
-                            <path d="M3 12H21" stroke="currentColor" stroke-width="2"/>
-                        </svg>
-                    </div>
-                    <h3>Expérience récente</h3>
-                    <p>Stage · Laboratoire LISSI</p>
-                    <p class="text-muted">Pilotage Robot Go2</p>
-                    <p class="text-small">Avril-Juin 2025</p>
-                </div>
-
-                <!-- Domaines d'expertise -->
-                <div class="overview-card slide-up" style="animation-delay: 0.2s;">
-                    <div class="card-icon purple">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 3h7v7H3V3zM14 3h7v7h-7V3zM14 14h7v7h-7v-7zM3 14h7v7H3v-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </div>
-                    <h3>Expertises</h3>
-                    <p>Data Engineering</p>
-                    <p>Développement Web</p>
-                    <p class="text-muted">Architecture de données</p>
-                </div>
-
-            </div>
+    <!-- ============ À PROPOS / LORE ============ -->
+    <section class="section" id="lore" data-section="Lore">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">01</span> Lore de l'agent</span>
+          <h2 class="section-title">À <span class="hl">propos</span></h2>
         </div>
+        <div class="lore">
+          <div class="lore__text reveal">
+            <p>Actuellement en <strong>3ᵉ année de BUT Informatique parcours Data</strong> à l'IUT de Créteil-Vitry et admis en <strong>cycle ingénieur Big Data &amp; Machine Learning à l'EFREI Paris</strong>, je m'intéresse particulièrement à la donnée sous toutes ses formes : ingestion, pipelines ETL, qualité, et valorisation via la visualisation ou l'intelligence artificielle.</p>
+            <p>Mes stages chez <strong>Alcatel Submarine Networks</strong> et au laboratoire <strong>LISSI</strong> m'ont confronté à des enjeux concrets de fiabilité des données et d'architecture logicielle, tandis que mes projets universitaires (agent IA conversationnel, plateforme météo) m'ont permis d'explorer le <strong>RAG</strong>, le <strong>NLP</strong> et le traitement de données temps réel.</p>
+            <p>Curieux, rigoureux et autonome, je cherche aujourd'hui une équipe où apprendre vite tout en apportant une vraie valeur ajoutée.</p>
+            <p class="extra">En dehors du code : lecture SF/polars, musculation, piano, et passionné de sport auto — F1 et endurance.</p>
+          </div>
+          <div class="lore__side">
+            <div class="fact panel reveal d1"><div class="k">Statut</div><div class="v">Recherche alternance <small>· 3 ans</small></div></div>
+            <div class="fact panel reveal d2"><div class="k">Rythme</div><div class="v">1 sem. entreprise <small>/ 1 sem. école</small></div></div>
+            <div class="fact panel reveal d3"><div class="k">Disponibilité</div><div class="v">Septembre <small>2026</small></div></div>
+            <div class="fact panel reveal d4"><div class="k">Secteur visé</div><div class="v">Big Data <small>· Machine Learning</small></div></div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Section Statistiques -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-card fade-in">
-                    <div class="stat-number gradient-text">10+</div>
-                    <div class="stat-label">Projets réalisés</div>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.1s;">
-                    <div class="stat-number gradient-text">3</div>
-                    <div class="stat-label">Langues parlées</div>
-                </div>
-                <div class="stat-card fade-in" style="animation-delay: 0.2s;">
-                    <div class="stat-number gradient-text">2+</div>
-                    <div class="stat-label">Années d'études</div>
-                </div>
-            </div>
+    <!-- ============ PARCOURS / TIMELINE ============ -->
+    <section class="section section--tight" id="parcours" data-section="Parcours">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">02</span> Historique de progression</span>
+          <h2 class="section-title">Parcours <span class="hl">&amp; niveaux</span></h2>
         </div>
+        <div class="timeline panel" style="padding:8px 24px">
+          <div class="tl-item reveal">
+            <div class="tl-year">2026—2029<small>EN COURS →</small></div>
+            <div class="tl-body">
+              <h3>Cycle Ingénieur · Big Data &amp; Machine Learning</h3>
+              <div class="org">EFREI Paris — Apprentissage</div>
+              <p>Admis en cycle ingénieur, spécialité Big Data &amp; Machine Learning, en rythme alternant (1 semaine entreprise / 1 semaine école).</p>
+              <span class="lvl">Niveau suivant débloqué</span>
+            </div>
+          </div>
+          <div class="tl-item reveal d1">
+            <div class="tl-year">2023—2026<small>VALIDÉ</small></div>
+            <div class="tl-body">
+              <h3>BUT Informatique · Spécialisation Data</h3>
+              <div class="org">IUT de Créteil-Vitry (UPEC)</div>
+              <p>Formation complète en informatique avec spécialisation Data : bases de données, développement, statistiques, et projets data appliqués (RAG, plateforme météo).</p>
+              <span class="lvl">3 ans · diplôme en cours de validation</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Call to Action -->
-    <section class="cta-section cta-compact">
-        <div class="container">
-            <div class="cta-content">
-                <h2><span class="gradient-text">Travaillons ensemble</span></h2>
-                <p>Intéressé par mon profil ? N'hésitez pas à me contacter pour échanger.</p>
-                <div class="cta-actions">
-                    <a href="contact.html" class="btn btn-primary">Me contacter</a>
-                    <a href="projects.html" class="btn btn-secondary">Voir les projets</a>
-                </div>
-            </div>
+    <!-- ============ MISSIONS / EXPÉRIENCES ============ -->
+    <section class="section" id="missions" data-section="Missions">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">03</span> Missions accomplies</span>
+          <h2 class="section-title">Expériences <span class="hl">professionnelles</span></h2>
+          <p class="section-sub">Chaque stage est une mission : contexte (briefing), actions menées, et résultat livré.</p>
         </div>
+
+        <div class="missions">
+          <!-- Mission Alcatel -->
+          <article class="mission panel reveal">
+            <div class="mission__head">
+              <div class="mission__title">
+                <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h10"/></svg></span>
+                <div>
+                  <h3>Stage Data Engineer</h3>
+                  <div class="org">Alcatel Submarine Networks · Ulis, France</div>
+                </div>
+              </div>
+              <div class="mission__meta">Mai → Août 2026<br /><span class="status">● EN COURS</span></div>
+            </div>
+            <div class="mission__body">
+              <p class="mission__brief"><b>Briefing —</b> Participation à un projet stratégique de migration de données pour moderniser l'infrastructure de traitement et de stockage.</p>
+              <div class="mobj">
+                <div class="row">
+                  <span class="lbl">Objectif</span>
+                  <span class="muted">Migrer des jeux de données entre plateformes en garantissant qualité, cohérence et traçabilité.</span>
+                </div>
+                <div class="row">
+                  <span class="lbl">Actions</span>
+                  <ul>
+                    <li>Analyse, <b>mapping</b>, validation et migration de jeux de données entre plateformes.</li>
+                    <li>Développement de <b>pipelines ETL</b> orchestrés via Apache Airflow, transformations à grande échelle avec Apache Spark.</li>
+                    <li>Gestion des <b>métadonnées</b> pour la traçabilité des flux et le cycle de vie des données.</li>
+                    <li>Stockage des données intermédiaires/finales sur <b>MinIO</b> (S3-compatible) et <b>MongoDB</b>.</li>
+                    <li>Mise en place de contrôles qualité, monitoring et observabilité automatisés.</li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <span class="lbl">Résultat</span>
+                  <span class="result">Pipeline de migration fiabilisé, qualité des données contrôlée en continu et flux documentés.</span>
+                </div>
+              </div>
+              <div class="chips"><span class="chip">Python</span><span class="chip">SQL</span><span class="chip">Apache Spark</span><span class="chip">Apache Airflow</span><span class="chip">MongoDB</span><span class="chip">MinIO</span><span class="chip">Docker</span></div>
+            </div>
+          </article>
+
+          <!-- Mission LISSI -->
+          <article class="mission panel reveal d1">
+            <div class="mission__head">
+              <div class="mission__title">
+                <span class="badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="8" width="14" height="9" rx="2"/><path d="M9 8V5h6v3M9 21v-4M15 21v-4"/></svg></span>
+                <div>
+                  <h3>Stage Développeur Informatique</h3>
+                  <div class="org">Laboratoire LISSI · Vitry-sur-Seine, France</div>
+                </div>
+              </div>
+              <div class="mission__meta">Avril → Juin 2025<br /><span class="status done">✔ TERMINÉE</span></div>
+            </div>
+            <div class="mission__body">
+              <p class="mission__brief"><b>Briefing —</b> Concevoir une API web de pilotage pour le robot quadrupède Go2 (Unitree), avec supervision temps réel.</p>
+              <div class="mobj">
+                <div class="row">
+                  <span class="lbl">Objectif</span>
+                  <span class="muted">Permettre le contrôle et la supervision à distance du robot via une interface web temps réel.</span>
+                </div>
+                <div class="row">
+                  <span class="lbl">Actions</span>
+                  <ul>
+                    <li>Conception d'une <b>API web</b> de pilotage (backend Flask/Python), passerelle <b>MQTT</b> sur Raspberry Pi.</li>
+                    <li>Interface de supervision temps réel : télémétrie, <b>flux vidéo embarqué</b>, envoi de commandes de déplacement.</li>
+                    <li>Gestion de trajectoires via algorithmes de <b>pathfinding</b>.</li>
+                    <li>Rédaction de la documentation technique (architecture, API).</li>
+                  </ul>
+                </div>
+                <div class="row">
+                  <span class="lbl">Résultat</span>
+                  <span class="result">Robot pilotable à distance avec retour vidéo et télémétrie, architecture documentée.</span>
+                </div>
+              </div>
+              <div class="chips"><span class="chip">Python</span><span class="chip">Flask</span><span class="chip">MQTT</span><span class="chip">Raspberry Pi</span><span class="chip">JavaScript</span><span class="chip">HTML/CSS</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="main-footer">
-        <div class="container">
-            <div class="footer-content">
-                <p>&copy; 2025 Hugo Alves Miranda · Étudiant BUT Informatique</p>
-                <p class="text-muted">Portfolio conçu avec passion</p>
-            </div>
+    <!-- ============ PROJETS / SÉLECTION DE CARTE ============ -->
+    <section class="section" id="projets" data-section="Cartes">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">04</span> Sélection de carte</span>
+          <h2 class="section-title">Projets <span class="hl">à explorer</span></h2>
+          <p class="section-sub">Choisis une carte pour lancer la mission : chaque projet dispose d'une page dédiée détaillée.</p>
         </div>
-    </footer>
+        <div class="cards">
+          <a class="gcard panel js-nav" href="projets/agent-ia-rag/">
+            <div class="gcard__media placeholder">
+              <span class="gcard__no">01</span>
+              <div class="gcard__tagrow"><span class="tagline tag-red">IA / RAG</span></div>
+              <svg viewBox="0 0 24 24" fill="none" stroke="#FF4655" stroke-width="1.4"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="13" r="1.2"/><circle cx="15" cy="13" r="1.2"/><path d="M2 13h2M20 13h2"/></svg>
+            </div>
+            <div class="gcard__body">
+              <div class="gcard__type">Pipeline RAG hybride</div>
+              <h3>Assistant IA pédagogique</h3>
+              <p>Assistant conversationnel sur base documentaire spécialisée (soins infirmiers) : ETL, recherche hybride BM25 + Qdrant, LLM via Ollama.</p>
+              <div class="gcard__foot">
+                <div class="chips"><span class="chip">Python</span><span class="chip">Qdrant</span><span class="chip">Ollama</span></div>
+                <span class="gcard__play">Lancer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span>
+              </div>
+            </div>
+          </a>
 
-    <!-- Scripts -->
-    <script src="js/navigation.js"></script>
-    <script src="js/keyboard-nav.js"></script>
-    <script src="js/animations.js"></script>
-    <script src="js/particles.js"></script>
-    <script src="js/theme-toggle.js"></script>
-    
+          <a class="gcard panel js-nav" href="projets/plateforme-meteo/">
+            <div class="gcard__media">
+              <img src="assets/img/projects/analyse-data/carte_thermique.png" alt="Carte thermique de la plateforme météo" loading="lazy" />
+              <span class="gcard__no">02</span>
+              <div class="gcard__tagrow"><span class="tagline">Data Viz · Live</span></div>
+            </div>
+            <div class="gcard__body">
+              <div class="gcard__type">Plateforme full-stack MVC</div>
+              <h3>Analyse météorologique</h3>
+              <p>Centralisation et visualisation de données météo (API SYNOP) : architecture MVC PHP, MySQL, graphiques, cartes thermiques — avec widget météo live.</p>
+              <div class="gcard__foot">
+                <div class="chips"><span class="chip">PHP MVC</span><span class="chip">MySQL</span><span class="chip">JS</span></div>
+                <span class="gcard__play">Lancer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14m-6-6l6 6-6 6"/></svg></span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPÉTENCES / LOADOUT ============ -->
+    <section class="section" id="competences" data-section="Loadout">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">05</span> Loadout / stats du joueur</span>
+          <h2 class="section-title">Compétences <span class="hl">&amp; rangs</span></h2>
+          <p class="section-sub">Vue d'ensemble façon stats de personnage, puis rang par famille de compétences.</p>
+        </div>
+
+        <div class="loadout">
+          <div class="radar-wrap panel reveal" id="radar" style="padding:24px"></div>
+
+          <div class="ranks reveal d1">
+            <div class="rank">
+              <span class="rank__badge" style="background:linear-gradient(145deg,#9fe9ff,#19e6e0)">DIA</span>
+              <div class="rank__main">
+                <div class="rank__name">Data Engineering <span class="tier" style="color:#19e6e0">Diamant</span></div>
+                <div class="rank__bar"><i data-fill="86%" style="background:linear-gradient(90deg,var(--accent),#19e6e0)"></i></div>
+                <div class="rank__tools">SQL (MySQL, PostgreSQL) · ETL · Pipelines · Ingestion API/Scraping · Qualité des données</div>
+              </div>
+            </div>
+            <div class="rank">
+              <span class="rank__badge" style="background:linear-gradient(145deg,#bfe6c9,#4fd18b)">PLA</span>
+              <div class="rank__main">
+                <div class="rank__name">Data Analysis &amp; Viz <span class="tier" style="color:#4fd18b">Platine</span></div>
+                <div class="rank__bar"><i data-fill="78%" style="background:linear-gradient(90deg,var(--accent),#4fd18b)"></i></div>
+                <div class="rank__tools">Power BI · Tableau · Graphiques / cartes / tableaux interactifs</div>
+              </div>
+            </div>
+            <div class="rank">
+              <span class="rank__badge" style="background:linear-gradient(145deg,#bfe6c9,#4fd18b)">PLA</span>
+              <div class="rank__main">
+                <div class="rank__name">Développement <span class="tier" style="color:#4fd18b">Platine</span></div>
+                <div class="rank__bar"><i data-fill="80%" style="background:linear-gradient(90deg,var(--accent),#4fd18b)"></i></div>
+                <div class="rank__tools">PHP (MVC) · Python (Pandas) · JavaScript (AJAX)</div>
+              </div>
+            </div>
+            <div class="rank">
+              <span class="rank__badge" style="background:linear-gradient(145deg,#9fe9ff,#19e6e0)">DIA</span>
+              <div class="rank__main">
+                <div class="rank__name">Outils &amp; DevOps <span class="tier" style="color:#19e6e0">Diamant</span></div>
+                <div class="rank__bar"><i data-fill="83%" style="background:linear-gradient(90deg,var(--accent),#19e6e0)"></i></div>
+                <div class="rank__tools">Git/GitHub · Docker · MongoDB · Qdrant · Spark · Airflow · MinIO</div>
+              </div>
+            </div>
+            <div class="rank">
+              <span class="rank__badge" style="background:linear-gradient(145deg,#ffd98a,#ffb01f)">OR</span>
+              <div class="rank__main">
+                <div class="rank__name">IA / Recherche <span class="tier" style="color:#ffb01f">Or</span></div>
+                <div class="rank__bar"><i data-fill="74%" style="background:linear-gradient(90deg,var(--accent),#ffb01f)"></i></div>
+                <div class="rank__tools">BM25 · Recherche vectorielle (Qdrant) · LLM via Ollama · IA générative</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="skill-extra">
+          <div class="skill-block panel reveal">
+            <h4>Soft skills</h4>
+            <div class="chips"><span class="chip">Résolution de problèmes</span><span class="chip">Autonomie</span><span class="chip">Rigueur</span><span class="chip">Curiosité technique</span><span class="chip">Adaptabilité</span><span class="chip">Esprit d'équipe</span></div>
+          </div>
+          <div class="skill-block panel reveal d1">
+            <h4>Langues</h4>
+            <div class="chips"><span class="chip">Anglais — B2</span><span class="chip">Portugais — C1</span><span class="chip">Espagnol — B1</span></div>
+          </div>
+          <div class="skill-block panel reveal d2">
+            <h4>Centres d'intérêt</h4>
+            <div class="chips"><span class="chip">Lecture SF / polars</span><span class="chip">Musculation</span><span class="chip">Piano</span><span class="chip">Gaming / FPS</span><span class="chip">Sport auto — F1 / EWC</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT / INVITER L'AGENT ============ -->
+    <section class="section" id="contact" data-section="Contact">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="kicker"><span class="idx">06</span> Inviter l'agent dans votre équipe</span>
+          <h2 class="recruit__big" style="margin-top:14px">Prêt à recruter <span class="hl">l'agent ?</span></h2>
+          <p class="section-sub" style="margin-top:12px">Disponible pour une <strong style="color:var(--text)">alternance de 3 ans à partir de septembre 2026</strong> (1 semaine entreprise / 1 semaine école). Discutons de la prochaine mission.</p>
+        </div>
+        <div class="recruit">
+          <!-- Formulaire : envoie via Formspree si data-endpoint est renseigné, sinon ouvre le client mail -->
+          <form class="cform panel reveal" id="contactForm" data-endpoint="" novalidate>
+            <h3 class="cform__ttl">Transmettre une communication</h3>
+            <div class="cform__row">
+              <label class="cform__field"><span>Nom / Entreprise</span>
+                <input type="text" name="name" required autocomplete="name" placeholder="Votre nom ou société" />
+              </label>
+              <label class="cform__field"><span>Email</span>
+                <input type="email" name="email" required autocomplete="email" placeholder="vous@entreprise.com" />
+              </label>
+            </div>
+            <label class="cform__field"><span>Message</span>
+              <textarea name="message" rows="5" required placeholder="Décrivez la mission, le poste, le contexte…"></textarea>
+            </label>
+            <input type="text" name="_gotcha" class="cform__hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+            <div class="cform__foot">
+              <button class="btn btn--primary" type="submit" id="cformSend">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l16-8-6 8 6 8z"/></svg>
+                Établir le contact
+              </button>
+              <span class="cform__status" id="cformStatus" role="status" aria-live="polite"></span>
+            </div>
+          </form>
+
+          <div class="contact-list reveal d1">
+            <a class="contact-row panel" href="mailto:fr.hugoalves@gmail.com">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+              <span><span class="k">Email</span><span class="v">fr.hugoalves@gmail.com</span></span>
+            </a>
+            <a class="contact-row panel" href="tel:+33660974636">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.8 2z"/></svg></span>
+              <span><span class="k">Téléphone</span><span class="v">+33 6 60 97 46 36</span></span>
+            </a>
+            <div class="contact-row panel">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-5.7-7-11a7 7 0 0 1 14 0c0 5.3-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span><span class="k">Localisation</span><span class="v">Paris (75007) · Permis B</span></span>
+            </div>
+            <a class="contact-row panel" href="https://www.linkedin.com/in/hugo-alves-miranda-4266a6280/" target="_blank" rel="noopener">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.3c0-1.3 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg></span>
+              <span><span class="k">Réseau</span><span class="v">LinkedIn</span></span>
+            </a>
+            <a class="contact-row panel" href="https://github.com/BoroHugreal" target="_blank" rel="noopener">
+              <span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1.5A10.5 10.5 0 0 0 8.7 22c.5.1.7-.2.7-.5v-1.8c-2.9.6-3.5-1.4-3.5-1.4-.5-1.2-1.2-1.5-1.2-1.5-.9-.7.1-.7.1-.7 1 .1 1.6 1.1 1.6 1.1.9 1.6 2.4 1.1 3 .9.1-.7.4-1.1.6-1.4-2.3-.3-4.7-1.2-4.7-5.1 0-1.1.4-2 1.1-2.8-.1-.3-.5-1.4.1-2.8 0 0 .9-.3 2.9 1.1a9.8 9.8 0 0 1 5.2 0c2-1.4 2.9-1.1 2.9-1.1.6 1.4.2 2.5.1 2.8.7.8 1.1 1.7 1.1 2.8 0 3.9-2.4 4.8-4.7 5.1.4.3.7.9.7 1.9v2.8c0 .3.2.6.7.5A10.5 10.5 0 0 0 12 1.5z"/></svg></span>
+              <span><span class="k">Code</span><span class="v">GitHub</span></span>
+            </a>
+            <div class="contact-cta" style="margin-top:6px">
+              <a class="btn btn--primary" href="mailto:fr.hugoalves@gmail.com">
+                <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                Email direct
+              </a>
+              <a class="btn js-nav" href="cv/">Récupérer le dossier (CV)</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="foot__inner">
+      <small>© <span data-year>2026</span> Hugo Alves Miranda — Portfolio "Agent Data / ML".</small>
+      <span class="sys">SYSTÈME : <b>EN LIGNE</b> · Direction artistique FPS tactique · <span class="mono">v1.0</span></span>
+    </div>
+  </footer>
+
+  <script src="assets/js/knowledge-base.js"></script>
+  <script src="assets/js/chatbot.js"></script>
+  <script src="assets/js/radar.js"></script>
+  <script src="assets/js/contact-form.js"></script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

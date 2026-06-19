@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Signal perdu | Hugo Alves Miranda</title>
+  <meta name="robots" content="noindex" />
+  <meta name="theme-color" content="#0A0E14" />
+  <!-- Page autonome : styles en ligne pour fonctionner à n'importe quelle profondeur d'URL -->
+  <style>
+    :root { --bg:#0A0E14; --accent:#FF4655; --cyan:#19e6e0; --text:#ECE8E1; --dim:#97a3b4; --border:#29333f; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { background:var(--bg); color:var(--text); min-height:100vh; display:grid; place-items:center; text-align:center; padding:24px;
+      font-family:"Rajdhani","Segoe UI",system-ui,sans-serif; overflow:hidden; }
+    .grid { position:fixed; inset:0; z-index:0; opacity:.5;
+      background-image:linear-gradient(rgba(41,51,63,.18) 1px,transparent 1px),linear-gradient(90deg,rgba(41,51,63,.18) 1px,transparent 1px);
+      background-size:48px 48px; -webkit-mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 75%); mask-image:radial-gradient(ellipse at 50% 40%,#000,transparent 75%); }
+    .scan { position:fixed; inset:0; z-index:1; pointer-events:none;
+      background:repeating-linear-gradient(to bottom,rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 2px,transparent 3px); mix-blend-mode:overlay; }
+    .box { position:relative; z-index:2; max-width:560px; }
+    .cross { width:64px; height:64px; margin:0 auto 26px; position:relative; }
+    .cross::before,.cross::after { content:""; position:absolute; background:var(--accent); box-shadow:0 0 14px rgba(255,70,85,.6); }
+    .cross::before { left:50%; top:0; width:3px; height:100%; transform:translateX(-50%); }
+    .cross::after { top:50%; left:0; height:3px; width:100%; transform:translateY(-50%); }
+    .ring { position:absolute; inset:10px; border:2px solid var(--border); border-radius:50%; }
+    .code { font-family:"Orbitron","Rajdhani",sans-serif; font-weight:900; font-size:clamp(4rem,18vw,8rem); line-height:1; letter-spacing:.04em; }
+    .code span { color:var(--accent); }
+    .ttl { font-weight:700; text-transform:uppercase; letter-spacing:.2em; font-size:clamp(1rem,3vw,1.4rem); margin:6px 0 14px; }
+    .ttl b { color:var(--cyan); }
+    p { color:var(--dim); margin-bottom:28px; font-size:1.02rem; }
+    .cta { display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+    a.btn { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; font-weight:600; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem;
+      color:#0a0e14; background:var(--accent); text-decoration:none; box-shadow:0 0 14px rgba(255,70,85,.4);
+      clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px); transition:transform .15s; }
+    a.btn.ghost { background:transparent; color:var(--text); border:1px solid var(--border); box-shadow:none; }
+    a.btn:hover { transform:translateY(-2px); }
+    .small { margin-top:22px; font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:#5b6677; }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="scan"></div>
+  <div class="box">
+    <div class="cross"><span class="ring"></span></div>
+    <div class="code">4<span>0</span>4</div>
+    <div class="ttl">Signal perdu · <b>zone hors-carte</b></div>
+    <p>Cette position n'existe pas sur la carte de l'agent. Le déplacement a échoué — replie-toi vers la base.</p>
+    <div class="cta">
+      <a class="btn" id="homeLink" href="/">⌂ Retour à la base</a>
+      <a class="btn ghost" id="cvLink" href="/">Dossier CV</a>
+    </div>
+    <div class="small">Erreur 404 — Hugo Alves Miranda</div>
+  </div>
+  <script>
+    (function () {
+      var seg = location.pathname.split("/").filter(Boolean)[0];
+      var base = (location.hostname.indexOf("github.io") !== -1 && seg) ? "/" + seg + "/" : "/";
+      document.getElementById("homeLink").href = base;
+      document.getElementById("cvLink").href = base + "cv/";
+    })();
+  </script>
+</body>
+</html>
