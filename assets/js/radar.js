@@ -8,7 +8,7 @@
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   const AXES = [
-    { label: "DATA ENG.", value: 0.86 },
+    { label: "DATA ENGINEERING", value: 0.86 },
     { label: "DATA ANALYSIS", value: 0.78 },
     { label: "DÉVELOPPEMENT", value: 0.80 },
     { label: "OUTILS / DEVOPS", value: 0.83 },
@@ -23,11 +23,12 @@
   function renderRadar() {
     const host = document.getElementById("radar");
     if (!host) return;
-    const S = 360, cx = S / 2, cy = S / 2, R = 128;
+    // viewBox large (540×380) pour que les libellés tiennent en entier autour du pentagone
+    const W = 540, H = 380, cx = W / 2, cy = 188, R = 122;
     const n = AXES.length, step = 360 / n;
     const NS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(NS, "svg");
-    svg.setAttribute("viewBox", `0 0 ${S} ${S}`);
+    svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
     svg.setAttribute("role", "img");
     svg.setAttribute("aria-label", "Radar des compétences : " + AXES.map((a) => a.label + " " + Math.round(a.value * 100) + "%").join(", "));
 
@@ -41,7 +42,7 @@
     AXES.forEach((ax, i) => {
       const [x, y] = polar(cx, cy, R, i * step);
       html += `<line class="radar-axis" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/>`;
-      const [lx, ly] = polar(cx, cy, R + 26, i * step);
+      const [lx, ly] = polar(cx, cy, R + 18, i * step);
       const anchor = Math.abs(lx - cx) < 6 ? "middle" : lx > cx ? "start" : "end";
       html += `<text class="radar-label" x="${lx}" y="${ly + 4}" text-anchor="${anchor}">${ax.label}</text>`;
     });

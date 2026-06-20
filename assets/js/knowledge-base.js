@@ -15,15 +15,15 @@ window.KB = [
   {
     id: "education",
     title: "Formation",
-    text: "formation parcours etudes diplome ecole universite iut creteil vitry upec but informatique data efrei paris cycle ingenieur big data machine learning 2023 2026 2029 apprentissage",
-    answer: "Parcours : BUT Informatique spécialisation Data à l'IUT de Créteil-Vitry (UPEC), 2023→2026, puis cycle ingénieur Big Data & Machine Learning à l'EFREI Paris en apprentissage, 2026→2029.",
+    text: "formation parcours etudes diplome ecole universite iut creteil vitry upec but informatique data efrei paris cycle ingenieur big data machine learning 2023 2026 2028 apprentissage majeure ing2 ing3",
+    answer: "Parcours : BUT Informatique spécialisation Data à l'IUT de Créteil-Vitry (UPEC), 2023→2026, puis cycle ingénieur Big Data & Machine Learning à l'EFREI Paris (majeure en apprentissage, ING2→ING3), 2026→2028.",
     source: "Parcours / Formation",
   },
   {
     id: "alternance",
     title: "Recherche d'alternance",
-    text: "alternance apprentissage disponibilite recrutement contrat embauche stage rythme 1 semaine entreprise ecole septembre 2026 3 ans rentree recherche poste",
-    answer: "Hugo recherche une alternance de 3 ans à partir de septembre 2026, sur un rythme d'1 semaine en entreprise / 1 semaine à l'école. Objectif : un poste orienté Big Data / Machine Learning / Data Engineering.",
+    text: "alternance apprentissage disponibilite recrutement contrat embauche stage rythme 2 jours ecole 3 jours entreprise septembre 2026 2 ans rentree recherche poste",
+    answer: "Hugo recherche une alternance de 2 ans à partir de septembre 2026, sur un rythme de 2 jours à l'école / 3 jours en entreprise. Objectif : un poste orienté Big Data / Machine Learning / Data Engineering.",
     source: "Hero / Contact",
   },
   {
@@ -118,6 +118,14 @@ window.KB = [
     answer: "Contact : ✉️ fr.hugoalves@gmail.com · 📞 +33 6 60 97 46 36 · 📍 Paris (75007). Liens LinkedIn et GitHub disponibles dans la section Contact.",
     link: "#contact",
     source: "Contact",
+  },
+  {
+    id: "but3",
+    title: "Bilan de compétences BUT3",
+    text: "competences but3 bilan referentiel niveau confirme auto reflexive administrer base de donnees systeme information decisionnel conception mise en oeuvre projet manager equipe informatique acquisition",
+    answer: "Le portfolio inclut un bilan auto-réflexif des 3 compétences du BUT3 (parcours Data) et la démonstration du niveau Confirmé : (1) administrer une BDD & concevoir des SI décisionnels, (2) participer à la conception/mise en œuvre d'un projet SI, (3) manager une équipe informatique — chacune étayée par les stages et projets.",
+    link: "bilan/",
+    source: "Bilan BUT3",
   },
   {
     id: "cv",

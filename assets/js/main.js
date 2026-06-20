@@ -6,7 +6,6 @@
 (function () {
   "use strict";
 
-  const BASE = window.SITE_BASE || "";
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));

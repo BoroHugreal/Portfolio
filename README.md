@@ -1,6 +1,6 @@
 # Portfolio Web Augmenté — Hugo Alves Miranda
 
-Portfolio personnel d'Hugo Alves Miranda — étudiant Data, futur ingénieur **Big Data & Machine Learning** (EFREI Paris), en recherche d'alternance 3 ans à partir de septembre 2026.
+Portfolio personnel d'Hugo Alves Miranda — étudiant Data, futur ingénieur **Big Data & Machine Learning** (EFREI Paris, majeure en apprentissage), en recherche d'alternance 2 ans (rythme 2 j école / 3 j entreprise) à partir de septembre 2026.
 
 Direction artistique **« FPS tactique »** (réf. Valorant) : néon-sur-noir, panneaux à coins coupés, curseur réticule, scanlines, et des fonctionnalités *augmentées* qui démontrent en live les compétences IA/Data du candidat.
 
@@ -28,6 +28,14 @@ Direction artistique **« FPS tactique »** (réf. Valorant) : néon-sur-noir, p
 
 Formulaire de contact (Formspree + repli mailto) · image de partage social `og:`/`twitter:` · `robots.txt` + `sitemap.xml` + URL canoniques · **polices auto-hébergées** (zéro CDN) · page **404** stylisée · contours de focus clavier (a11y) · **déploiement GitHub Pages automatisé** (GitHub Actions).
 
+### Exigence académique BUT3
+
+La page [`/bilan/`](bilan/index.html) démontre l'**adéquation** entre les **3 compétences** du BUT3 Informatique (parcours Data) et l'acquisition du **niveau Confirmé**, via une **analyse auto-réflexive** étayée par les stages et projets :
+
+1. Administrer une base de données, concevoir et réaliser des SI décisionnels ;
+2. Participer à la conception et à la mise en œuvre d'un projet SI ;
+3. Manager une équipe informatique.
+
 ## 🗂️ Structure
 
 ```text
@@ -41,6 +49,7 @@ Formulaire de contact (Formspree + repli mailto) · image de partage social `og:
 │   ├── agent-ia-rag/index.html     # Projet 1 — Assistant IA pédagogique (RAG hybride)
 │   └── plateforme-meteo/index.html # Projet 2 — Plateforme météo (+ widget live)
 ├── cv/index.html                   # CV numérique imprimable
+├── bilan/index.html                # Bilan auto-réflexif des 3 compétences BUT3 (niveau Confirmé)
 ├── assets/
 │   ├── css/
 │   │   ├── style.css               # Design system tactique complet (+ focus a11y)

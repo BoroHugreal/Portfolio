@@ -56,13 +56,26 @@
   const r = (v) => (Number.isFinite(+v) ? Math.round(+v) : "—");
   const n = (v) => (Number.isFinite(+v) ? +v : "—");
 
-  async function load(host, city) {
-    host.querySelector("#wxBody").innerHTML = '<div class="weather__err">📡 Acquisition des données…</div>';
+  // Transition douce : on remplace le contenu en fondu, sans vidage brutal
+  function paint(body, html) {
+    body.style.opacity = "0";
+    setTimeout(() => { body.innerHTML = html; requestAnimationFrame(() => { body.style.opacity = "1"; }); }, 150);
+  }
+
+  let reqId = 0;                                                 // R1 : jeton anti-course
+
+  async function load(host, city, firstLoad) {
+    const myId = ++reqId;                                        // requête la plus récente
+    const body = host.querySelector("#wxBody");
+    body.style.transition = "opacity .3s ease";
+    if (firstLoad) body.innerHTML = '<div class="weather__err">📡 Acquisition des données…</div>';
+    else body.style.opacity = "0.4";                              // on atténue l'ancien contenu pendant le chargement
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${city.lat}&longitude=${city.lon}` +
       `&current=temperature_2m,relative_humidity_2m,wind_speed_10m,apparent_temperature,weather_code` +
       `&hourly=temperature_2m&forecast_days=1&timezone=auto`;
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 9000);          // R1 : pas d'attente infinie
+    let out = "";
     try {
       const res = await fetch(url, { signal: ctrl.signal, cache: "no-store" });
       if (!res.ok) throw new Error("HTTP " + res.status);
@@ -74,7 +87,7 @@
       let temps = (d.hourly && Array.isArray(d.hourly.temperature_2m) ? d.hourly.temperature_2m : [])
         .map(Number).filter(Number.isFinite).slice(0, 24);
       if (!temps.length && Number.isFinite(+cur.temperature_2m)) temps = [+cur.temperature_2m];
-      host.querySelector("#wxBody").innerHTML = `
+      out = `
         <div class="weather__grid">
           <div class="weather__now">
             <div class="city">📍 ${city.name}</div>
@@ -94,10 +107,10 @@
       window.Ach && window.Ach.unlock("meteo", "Overlay météo activé");
     } catch (e) {
       const aborted = e && e.name === "AbortError";
-      host.querySelector("#wxBody").innerHTML =
-        `<div class="weather__err">⚠️ ${aborted ? "Délai dépassé" : "Données indisponibles"} (hors-ligne ou API injoignable).<br/><small class="muted">Le projet réel s'appuie sur l'API SYNOP via un backend PHP.</small></div>`;
+      out = `<div class="weather__err">⚠️ ${aborted ? "Délai dépassé" : "Données indisponibles"} (hors-ligne ou API injoignable).<br/><small class="muted">Le projet réel s'appuie sur l'API SYNOP via un backend PHP.</small></div>`;
     } finally {
       clearTimeout(timer);
+      if (myId === reqId) paint(body, out);                     // on ignore les réponses dépassées
     }
   }
 
@@ -114,12 +127,12 @@
       <div class="weather__cities" id="wxCities">
         ${CITIES.map((c, i) => `<button type="button" data-i="${i}" class="${i === 0 ? "active" : ""}">${c.name}</button>`).join("")}
       </div>`;
-    load(host, CITIES[0]);
+    load(host, CITIES[0], true);
     host.querySelector("#wxCities").addEventListener("click", (e) => {
-      const b = e.target.closest("button"); if (!b) return;
+      const b = e.target.closest("button"); if (!b || b.classList.contains("active")) return;
       host.querySelectorAll("#wxCities button").forEach((x) => x.classList.remove("active"));
       b.classList.add("active");
-      load(host, CITIES[+b.dataset.i]);
+      load(host, CITIES[+b.dataset.i], false);
     });
   }
 

@@ -20,7 +20,13 @@
   </url>
   <url>
     <loc>https://borohugreal.github.io/Portfolio/cv/</loc>
-    <lastmod>2026-06-19</lastmod>
+    <lastmod>2026-06-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://borohugreal.github.io/Portfolio/bilan/</loc>
+    <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

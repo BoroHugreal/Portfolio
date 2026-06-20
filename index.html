@@ -6,7 +6,7 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; font-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self' https://api.open-meteo.com https://formspree.io; form-action 'self' https://formspree.io; upgrade-insecure-requests" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
   <title>Hugo Alves Miranda — Agent Data / ML</title>
-  <meta name="description" content="Portfolio d'Hugo Alves Miranda — étudiant Data, futur ingénieur Big Data & Machine Learning. Recherche alternance 3 ans à partir de septembre 2026." />
+  <meta name="description" content="Portfolio d'Hugo Alves Miranda — étudiant Data, futur ingénieur Big Data & Machine Learning. Recherche alternance 2 ans à partir de septembre 2026." />
   <meta name="author" content="Hugo Alves Miranda" />
   <meta property="og:title" content="Hugo Alves Miranda — Agent Data / ML" />
   <meta property="og:description" content="Étudiant Data, futur ingénieur Big Data & Machine Learning. Portfolio interactif (RAG, météo live) à direction artistique FPS tactique." />
@@ -32,7 +32,7 @@
 
   <!-- ÉCRAN DE CHARGEMENT -->
   <div class="loader" id="loader">
-    <div class="loader__logo">HUGO<span class="hl">//</span>AM</div>
+    <div class="loader__logo">HUGO ALVES <span class="hl">MIRANDA</span></div>
     <div class="loader__bar"><i></i></div>
     <div class="loader__pct">CHARGEMENT 0%</div>
     <p class="loader__tip">Initialisation de l'interface tactique…</p>
@@ -50,6 +50,7 @@
       <a href="#missions">Missions</a>
       <a href="#projets">Cartes</a>
       <a href="#competences">Loadout</a>
+      <a class="js-nav" href="bilan/">BUT3</a>
       <a href="#contact">Contact</a>
     </nav>
     <div class="hud-actions">
@@ -74,6 +75,7 @@
     <a href="#missions"><span class="n">03</span> Missions</a>
     <a href="#projets"><span class="n">04</span> Cartes</a>
     <a href="#competences"><span class="n">05</span> Loadout</a>
+    <a class="js-nav" href="bilan/"><span class="n">↳</span> Bilan BUT3</a>
     <a href="#contact"><span class="n">06</span> Contact</a>
     <a class="js-nav" href="cv/"><span class="n">→</span> Dossier CV</a>
   </nav>
@@ -87,7 +89,7 @@
           <div class="hero__role reveal"><span class="kicker"><span class="idx">//</span> Écran de sélection d'agent</span></div>
           <h1 class="hero__name reveal d1">HUGO ALVES<span class="hl">MIRANDA</span></h1>
           <p class="hero__line reveal d2">Étudiant Data <span class="arrow">→</span> Futur Ingénieur Big&nbsp;Data &amp; Machine&nbsp;Learning</p>
-          <p class="hero__desc reveal d2">Admis en cycle ingénieur Big Data &amp; ML à l'EFREI Paris, je recherche une <strong>alternance de 3&nbsp;ans</strong> (rythme 1 semaine entreprise / 1 semaine école) à partir de <strong>septembre 2026</strong>.</p>
+          <p class="hero__desc reveal d2">Admis en cycle ingénieur Big Data &amp; ML à l'EFREI Paris (majeure en apprentissage, entrée en ING2), je recherche une <strong>alternance de 2&nbsp;ans</strong> (rythme 2&nbsp;jours école / 3&nbsp;jours entreprise) à partir de <strong>septembre 2026</strong>.</p>
           <div class="hero__cta reveal d3">
             <a class="btn btn--primary js-nav" href="cv/">
               <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
@@ -100,7 +102,7 @@
             <div class="qstat"><div class="v">2</div><div class="k">Missions accomplies</div></div>
             <div class="qstat"><div class="v">2</div><div class="k">Projets data phares</div></div>
             <div class="qstat"><div class="v">3</div><div class="k">Langues parlées</div></div>
-            <div class="qstat"><div class="v">09·26</div><div class="k">Disponible</div></div>
+            <div class="qstat"><div class="v" style="font-size:1.25rem">Sept. 2026</div><div class="k">Disponible</div></div>
           </div>
         </div>
 
@@ -108,12 +110,12 @@
           <div class="agent-card__top"><span>Dossier&nbsp;agent</span><span class="role-tag">// Data&nbsp;/&nbsp;ML</span></div>
           <div class="agent-card__media">
             <img src="assets/img/profile.png" alt="Portrait d'Hugo Alves Miranda" loading="eager" />
-            <div class="agent-card__name"><b>Hugo A.M</b><span>Data Engineer · Analyst</span></div>
+            <div class="agent-card__name"><b>Hugo Alves Miranda</b><span>Data Engineer · Analyst</span></div>
           </div>
           <div class="agent-card__foot">
             <div><div class="v">DATA/ML</div><div class="k">Rôle</div></div>
             <div><div class="v">PARIS</div><div class="k">Secteur</div></div>
-            <div><div class="v">09·26</div><div class="k">Dispo</div></div>
+            <div><div class="v" style="font-size:1rem">Sept.&nbsp;2026</div><div class="k">Dispo</div></div>
           </div>
         </aside>
       </div>
@@ -135,8 +137,8 @@
             <p class="extra">En dehors du code : lecture SF/polars, musculation, piano, et passionné de sport auto — F1 et endurance.</p>
           </div>
           <div class="lore__side">
-            <div class="fact panel reveal d1"><div class="k">Statut</div><div class="v">Recherche alternance <small>· 3 ans</small></div></div>
-            <div class="fact panel reveal d2"><div class="k">Rythme</div><div class="v">1 sem. entreprise <small>/ 1 sem. école</small></div></div>
+            <div class="fact panel reveal d1"><div class="k">Statut</div><div class="v">Recherche alternance <small>· 2 ans</small></div></div>
+            <div class="fact panel reveal d2"><div class="k">Rythme</div><div class="v">2 j. école <small>/ 3 j. entreprise</small></div></div>
             <div class="fact panel reveal d3"><div class="k">Disponibilité</div><div class="v">Septembre <small>2026</small></div></div>
             <div class="fact panel reveal d4"><div class="k">Secteur visé</div><div class="v">Big Data <small>· Machine Learning</small></div></div>
           </div>
@@ -153,11 +155,11 @@
         </div>
         <div class="timeline panel" style="padding:8px 24px">
           <div class="tl-item reveal">
-            <div class="tl-year">2026—2029<small>EN COURS →</small></div>
+            <div class="tl-year">2026—2028<small>À VENIR →</small></div>
             <div class="tl-body">
-              <h3>Cycle Ingénieur · Big Data &amp; Machine Learning</h3>
-              <div class="org">EFREI Paris — Apprentissage</div>
-              <p>Admis en cycle ingénieur, spécialité Big Data &amp; Machine Learning, en rythme alternant (1 semaine entreprise / 1 semaine école).</p>
+              <h3>Cycle Ingénieur · Majeure Big Data &amp; Machine Learning</h3>
+              <div class="org">EFREI Paris — Apprentissage (entrée en ING2)</div>
+              <p>Admis en cycle ingénieur, majeure Big Data &amp; Machine Learning en apprentissage (ING2 → ING3), en rythme alterné 2 jours école / 3 jours entreprise.</p>
               <span class="lvl">Niveau suivant débloqué</span>
             </div>
           </div>
@@ -378,6 +380,14 @@
             <div class="chips"><span class="chip">Lecture SF / polars</span><span class="chip">Musculation</span><span class="chip">Piano</span><span class="chip">Gaming / FPS</span><span class="chip">Sport auto — F1 / EWC</span></div>
           </div>
         </div>
+
+        <div class="reveal" style="margin-top:28px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between">
+          <p class="muted" style="margin:0;max-width:52ch">Bilan auto-réflexif des <strong style="color:var(--text)">3 compétences du BUT3</strong> (parcours Data) et démonstration du niveau <strong style="color:var(--cyan)">Confirmé</strong>.</p>
+          <a class="btn btn--primary js-nav" href="bilan/">
+            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8M21 12a9 9 0 1 1-6.2-8.6"/></svg>
+            Voir le bilan de compétences BUT3
+          </a>
+        </div>
       </div>
     </section>
 
@@ -387,7 +397,7 @@
         <div class="section-head reveal">
           <span class="kicker"><span class="idx">06</span> Inviter l'agent dans votre équipe</span>
           <h2 class="recruit__big" style="margin-top:14px">Prêt à recruter <span class="hl">l'agent ?</span></h2>
-          <p class="section-sub" style="margin-top:12px">Disponible pour une <strong style="color:var(--text)">alternance de 3 ans à partir de septembre 2026</strong> (1 semaine entreprise / 1 semaine école). Discutons de la prochaine mission.</p>
+          <p class="section-sub" style="margin-top:12px">Disponible pour une <strong style="color:var(--text)">alternance de 2 ans à partir de septembre 2026</strong> (rythme 2 jours école / 3 jours entreprise). Discutons de la prochaine mission.</p>
         </div>
         <div class="recruit">
           <!-- Formulaire : envoie via Formspree si data-endpoint est renseigné, sinon ouvre le client mail -->
