@@ -1,13 +1,31 @@
 /* =================================================================
    chatbot.js — "Com tactique" : widget RAG flottant
-   Démo live de récupération (RAG) : retrieval BM25 sur le contenu
-   réel du site (window.KB), puis composition d'une réponse.
-   100% côté client — aucune donnée envoyée à l'extérieur.
+   RAG complet : retrieval BM25 sur le contenu réel du site (window.KB)
+   → puis, si un endpoint Ollama est configuré, génération par LLM
+   ancrée sur les passages récupérés ; sinon réponse extractive (BM25).
    ================================================================= */
 (function () {
   "use strict";
   const BASE = document.documentElement.getAttribute("data-base") || window.SITE_BASE || "";
   const KB = window.KB || [];
+
+  /* =================================================================
+     CONFIG LLM (Ollama) — OPTIONNELLE
+     - Laisser LLM_ENDPOINT vide  => mode 100% BM25 extractif (déployé tel quel).
+     - Pour activer la génération LLM, renseigne l'URL d'un serveur Ollama
+       joignable DEPUIS LE NAVIGATEUR du visiteur :
+         • en local  : "http://localhost:11434"
+             1) lance Ollama avec CORS :  OLLAMA_ORIGINS=*  ollama serve
+             2) ajoute cette URL au  connect-src  de la CSP des pages
+             3) sers le site en http (sinon le https bloque l'appel http local)
+         • en prod   : un endpoint HTTPS public, CORS activé (ex. GPU cloud)
+             → ajoute l'origine au connect-src de la CSP.
+     ================================================================= */
+  const LLM_ENDPOINT = "";              // ex: "http://localhost:11434"
+  const LLM_MODEL = "llama3.2";
+  const OLLAMA_URL = (LLM_ENDPOINT || window.OLLAMA_URL || "").replace(/\/+$/, "");
+  const OLLAMA_MODEL = window.OLLAMA_MODEL || LLM_MODEL;
+  const LLM_ON = !!OLLAMA_URL;
 
   /* ---------- NLP minimal (FR) ---------- */
   const STOP = new Set("le la les un une des de du d a au aux et ou ce cet cette ces que qui quoi est es es-tu sont son sa ses pour par sur dans en il elle on nous vous ils elles je tu me te se ne pas plus avec sans tes ton ta mes mon ma comme quel quelle quels quelles ou est-ce qu quel-est c-est cest tres bien aussi y l".split(/\s+/));
@@ -40,13 +58,13 @@
     }).filter((r) => r.score > 0).sort((a, b) => b.score - a.score);
   }
 
-  /* ---------- Réponses conversationnelles ---------- */
+  /* ---------- Réponses conversationnelles (sans LLM) ---------- */
   const GREET = /\b(bonjour|salut|hello|coucou|hey|yo|bonsoir)\b/i;
   const THANKS = /\b(merci|thanks|nickel|parfait|top|cool)\b/i;
   const BYE = /\b(au revoir|bye|ciao|a\+|aurevoir)\b/i;
   const WHATAREYOU = /(qui es[- ]?tu|t'?es qui|c'?est quoi ce chat(bot)?|comment.*(marche|fonctionne)|t'?es un bot|c'?est quoi le rag|explique.*\brag\b)/i;
 
-  function answerFor(query) {
+  function shortcut(query) {
     if (GREET.test(query) && tokenize(query).length <= 3)
       return { html: "Bien reçu, agent. Je suis l'assistant tactique d'Hugo — pose-moi une question sur son <b>parcours</b>, ses <b>missions</b>, ses <b>projets</b> ou ses <b>compétences</b>.", src: null };
     if (THANKS.test(query) && tokenize(query).length <= 3)
@@ -54,7 +72,14 @@
     if (BYE.test(query) && tokenize(query).length <= 3)
       return { html: "Mission terminée. Reviens quand tu veux — et pense à <a class=\"js-nav\" href=\"" + BASE + "cv/\">récupérer le dossier complet</a>.", src: null };
     if (WHATAREYOU.test(query))
-      return { html: "Je suis une démo du <b>Projet 1</b> : un mini-RAG. Je transforme ta question en mots-clés, je score le contenu réel du site avec <b>BM25</b>, puis je renvoie le passage le plus pertinent. Le vrai projet ajoute une recherche vectorielle (Qdrant) et un LLM (Ollama).", src: "Projet 1" };
+      return { html: "Je suis l'assistant RAG du <b>Projet 1</b> : je transforme ta question en mots-clés, je récupère le contenu réel du site avec <b>BM25</b>" + (LLM_ON ? ", puis un <b>LLM (Ollama)</b> rédige une réponse ancrée sur ces passages." : ", et je renvoie le passage le plus pertinent (le vrai projet ajoute une recherche vectorielle Qdrant + un LLM Ollama)."), src: "Projet 1" };
+    return null;
+  }
+
+  // Réponse extractive (repli, ou mode sans LLM)
+  function answerFor(query) {
+    const sc = shortcut(query);
+    if (sc) return sc;
 
     const hits = search(query);
     if (!hits.length || hits[0].score < 0.6)
@@ -70,10 +95,35 @@
       const href = top.link.startsWith("#") ? top.link : BASE + top.link;
       html += ` <a class="${cls}" href="${href}">→ en savoir plus</a>`;
     }
-    // recoupement : 2e source proche
     const extras = hits.slice(1, 3).filter((h) => h.score > hits[0].score * 0.55 && h.ref.source !== top.source);
     const srcLabel = [top.source, ...extras.map((e) => e.ref.source)].filter(Boolean);
     return { html, src: srcLabel.length ? "Source : " + [...new Set(srcLabel)].join(" · ") : null };
+  }
+
+  /* ---------- Génération LLM (Ollama) ancrée sur le retrieval ---------- */
+  async function callLLM(query, hits) {
+    const context = hits.slice(0, 3).map((h, i) => `[${i + 1}] (${h.ref.source}) ${h.ref.answer}`).join("\n");
+    const messages = [
+      { role: "system", content: "Tu es l'assistant du portfolio d'Hugo Alves Miranda. Réponds en français, en 1 à 3 phrases, de façon concise et professionnelle (tu peux reprendre sobrement un ton « gaming tactique »). Utilise UNIQUEMENT le CONTEXTE fourni ; si l'information n'y figure pas, dis-le honnêtement et invite à reformuler. N'invente jamais de fait." },
+      { role: "user", content: `CONTEXTE :\n${context}\n\nQUESTION : ${query}` },
+    ];
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 30000);
+    try {
+      const res = await fetch(`${OLLAMA_URL}/api/chat`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: OLLAMA_MODEL, messages, stream: false, options: { temperature: 0.3 } }),
+        signal: ctrl.signal,
+      });
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      const text = data && data.message && data.message.content ? data.message.content.trim() : "";
+      if (!text) throw new Error("réponse LLM vide");
+      return text;
+    } finally {
+      clearTimeout(timer);
+    }
   }
 
   /* ---------- UI ---------- */
@@ -81,6 +131,11 @@
   const ICON_SEND = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12l16-8-6 8 6 8z"/></svg>';
   const ICON_BOT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="8" width="16" height="11" rx="2"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="13" r="1.2" fill="currentColor"/><circle cx="15" cy="13" r="1.2" fill="currentColor"/></svg>';
   const SUGG = ["Qui est Hugo ?", "Le stage Alcatel", "Le projet RAG", "Ses compétences data", "Comment le contacter ?"];
+  const STATUS = LLM_ON ? "En ligne · RAG + Ollama" : "En ligne · démo BM25";
+  const DISCLAIMER = LLM_ON
+    ? `Réponses générées par un LLM (Ollama · ${OLLAMA_MODEL}) ancrées sur le contenu récupéré (RAG).`
+    : "Réponses générées par récupération (RAG) sur le contenu réel du site.";
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 
   function build() {
     const fab = document.createElement("button");
@@ -93,7 +148,7 @@
       <div class="chat-panel__in">
         <div class="chat-head">
           <span class="av">${ICON_BOT}</span>
-          <div class="meta"><b>Assistant RAG</b><span>En ligne · démo BM25</span></div>
+          <div class="meta"><b>Assistant RAG</b><span>${STATUS}</span></div>
           <button class="x" id="chatClose" aria-label="Fermer">✕</button>
         </div>
         <div class="chat-log" id="chatLog"></div>
@@ -102,7 +157,7 @@
           <input id="chatInput" type="text" autocomplete="off" placeholder="Pose ta question à l'agent…" aria-label="Votre message" />
           <button class="send" type="submit" aria-label="Envoyer">${ICON_SEND}</button>
         </form>
-        <div class="chat-disclaimer">Réponses générées par récupération (RAG) sur le contenu réel du site.</div>
+        <div class="chat-disclaimer">${DISCLAIMER}</div>
       </div>`;
 
     document.body.appendChild(fab);
@@ -127,18 +182,51 @@
       m.innerHTML = '<span class="typing"><i></i><i></i><i></i></span>';
       log.appendChild(m); scroll(); return m;
     }
-    function respond(q) {
+    // rendu d'une réponse "de confiance" (KB) : HTML
+    function render(bubble, ans) {
+      bubble.innerHTML = ans.html + (ans.src ? `<span class="src">${ans.src}</span>` : "");
+      scroll();
+    }
+    // rendu d'une réponse LLM : texte brut (anti-injection) + source/lien construits en DOM
+    function renderLLM(bubble, text, top) {
+      bubble.textContent = text;
+      if (top && top.link) {
+        const internal = !top.link.startsWith("#");
+        const a = document.createElement("a");
+        a.href = internal ? BASE + top.link : top.link;
+        if (internal) a.className = "js-nav";
+        a.textContent = "→ en savoir plus";
+        bubble.appendChild(document.createElement("br"));
+        bubble.appendChild(a);
+      }
+      const s = document.createElement("span");
+      s.className = "src";
+      s.textContent = "Source : " + (top ? top.source : "—") + " · LLM " + OLLAMA_MODEL;
+      bubble.appendChild(s);
+      scroll();
+    }
+    async function respond(q) {
       const t = botThinking();
-      setTimeout(() => {
-        const { html, src } = answerFor(q);
-        t.innerHTML = html + (src ? `<span class="src">${src}</span>` : "");
-        scroll();
-      }, 420 + Math.random() * 360);
+      const sc = shortcut(q);
+      if (sc) { await wait(360); render(t, sc); return; }
+
+      const hits = search(q);
+      if (LLM_ON && hits.length && hits[0].score >= 0.6) {
+        try {
+          const text = await callLLM(q, hits);
+          renderLLM(t, text, hits[0].ref);
+          return;
+        } catch (e) {
+          // repli silencieux sur la réponse extractive
+        }
+      }
+      await wait(340);
+      render(t, answerFor(q));
     }
     function addUser(text) {
       const m = document.createElement("div");
       m.className = "msg user";
-      m.textContent = text;                 // S3 : message utilisateur jamais interprété comme HTML
+      m.textContent = text;                 // message utilisateur jamais interprété comme HTML
       log.appendChild(m); scroll(); return m;
     }
     function ask(q) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-base="../">
+<html lang="fr" data-base="../" data-page="bilan">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,38 +33,9 @@
     <p class="loader__tip">Évaluation du niveau de compétence…</p>
   </div>
 
-  <header class="hud-top">
-    <a class="brand js-nav" href="../index.html" aria-label="Accueil">
-      <span class="tag">AM</span>
-      <span class="who">HUGO ALVES MIRANDA<small>DATA / MACHINE LEARNING</small></span>
-    </a>
-    <nav class="nav" aria-label="Navigation principale">
-      <a class="js-nav" href="../index.html#missions">Missions</a>
-      <a class="js-nav" href="../index.html#projets">Cartes</a>
-      <a class="js-nav" href="../index.html#competences">Loadout</a>
-      <a class="js-nav" href="../index.html#contact">Contact</a>
-    </nav>
-    <div class="hud-actions">
-      <a class="btn btn--sm btn--primary js-nav" href="../cv/">Dossier&nbsp;CV</a>
-      <button class="icon-btn" id="sfxToggle" aria-pressed="false" title="Son d'interface" aria-label="Activer le son d'interface">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14"/></svg>
-      </button>
-      <button class="icon-btn on" id="fxToggle" title="Ambiance écran" aria-label="Activer l'ambiance écran">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M3 13h18M8 21h8"/></svg>
-      </button>
-      <button class="icon-btn burger" id="burger" aria-label="Menu" aria-expanded="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-      </button>
-    </div>
-  </header>
+  <header class="hud-top" id="siteHeader"></header>
 
-  <nav class="mnav" id="mnav" aria-label="Menu mobile">
-    <a class="js-nav" href="../index.html"><span class="n">00</span> Accueil</a>
-    <a class="js-nav" href="../index.html#missions"><span class="n">03</span> Missions</a>
-    <a class="js-nav" href="../index.html#projets"><span class="n">04</span> Cartes</a>
-    <a class="js-nav" href="../index.html#competences"><span class="n">05</span> Loadout</a>
-    <a class="js-nav" href="../cv/"><span class="n">→</span> Dossier CV</a>
-  </nav>
+  <nav class="mnav" id="mnav" aria-label="Menu mobile"></nav>
 
   <main>
     <section class="phero">
@@ -125,8 +96,6 @@
             <li><b>Workflow collaboratif</b> : organisation Git (branches, revues de code), conventions communes et cohérence des livrables.</li>
             <li><b>Rôle d'interface</b> entre le besoin (encadrant / commanditaire) et l'équipe technique, avec une attention à la communication.</li>
           </ul>
-          <!-- TODO Hugo : ajoute ici un exemple CONCRET pour renforcer cette compétence
-               (nom du projet, taille de l'équipe, ton rôle précis, résultat obtenu). -->
           <div class="chips" style="margin:12px 0 14px"><span class="chip">Coordination</span><span class="chip">Workflow Git</span><span class="chip">Revue de code</span><span class="chip">Planification</span><span class="chip">Communication</span><span class="chip">Esprit d'équipe</span></div>
           <h3 class="comp-sub">Analyse auto-réflexive</h3>
           <p>Sur les projets de groupe, j'ai régulièrement assuré la coordination technique : cadrage des objectifs, répartition des tâches, mise en place d'un workflow Git (branches, revues de code) et suivi de l'avancement. J'ai veillé à la communication au sein de l'équipe et à la montée en compétence de mes coéquipiers, en jouant le rôle d'interface entre le besoin et la réalisation. Je sais fédérer autour d'un objectif commun et garantir la cohérence des livrables : une posture de management que je situe au niveau <b style="color:var(--cyan)">Confirmé</b>.</p>
@@ -156,6 +125,7 @@
 
   <script src="../assets/js/knowledge-base.js"></script>
   <script src="../assets/js/chatbot.js"></script>
+  <script src="../assets/js/chrome.js"></script>
   <script src="../assets/js/main.js"></script>
 </body>
 </html>

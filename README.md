@@ -57,7 +57,8 @@ La page [`/bilan/`](bilan/index.html) démontre l'**adéquation** entre les **3 
 │   │   └── cv.css                  # Mise en page CV + styles d'impression
 │   ├── js/
 │   │   ├── main.js                 # HUD : curseur, son, loader, nav, reveal, mini-map, achievements, easter egg
-│   │   ├── chatbot.js              # Widget RAG (moteur BM25)
+│   │   ├── chrome.js               # Entête + menu mobile partagés (générés depuis data-base/data-page)
+│   │   ├── chatbot.js              # Widget RAG (BM25 + génération LLM Ollama optionnelle)
 │   │   ├── knowledge-base.js       # Corpus réel indexé par le chatbot
 │   │   ├── radar.js                # Radar de compétences + barres de rang
 │   │   ├── weather.js              # Widget météo live (Open-Meteo)
@@ -95,7 +96,16 @@ C'est une **démonstration vivante du Projet 1**, entièrement côté client :
 2. Chaque document du corpus (`knowledge-base.js`) est scoré avec **BM25** (`k1=1.5`, `b=0.75`).
 3. Le passage le plus pertinent est renvoyé, avec sa source et un lien éventuel.
 
-Le projet réel va plus loin : recherche **hybride** (BM25 + vecteurs Qdrant) et génération par **LLM via Ollama**. Ici, pas de backend ni d'appel externe — les réponses proviennent du contenu réel du site.
+**Génération LLM optionnelle (Ollama).** Si un endpoint Ollama est configuré, une étape de **génération** s'ajoute après le retrieval : les passages BM25 sont injectés dans le prompt d'un LLM (RAG complet), avec **repli automatique** sur la réponse extractive si le LLM est injoignable / non configuré.
+
+Pour l'activer (en haut de [`assets/js/chatbot.js`](assets/js/chatbot.js)) :
+
+1. Renseigne `LLM_ENDPOINT` (ex. `"http://localhost:11434"`) et `LLM_MODEL` (ex. `"llama3.2"`).
+2. Lance Ollama avec CORS : `OLLAMA_ORIGINS=* ollama serve` (après `ollama pull llama3.2`).
+3. Ajoute l'origine de l'endpoint au `connect-src` de la balise CSP des pages.
+4. En local, sers le site en **HTTP** (une page HTTPS ne peut pas appeler `http://localhost`).
+
+`LLM_ENDPOINT` vide = mode **100 % BM25** (aucun appel externe) — c'est le comportement par défaut du site déployé.
 
 ## ⚙️ Personnalisation rapide
 
