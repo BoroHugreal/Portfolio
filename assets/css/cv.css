@@ -1,115 +1,132 @@
 /* =================================================================
-   cv.css — CV numérique (reproduction fidèle, imprimable)
-   Écran : variante sobre de l'univers tactique.
-   Impression : bascule en noir-sur-blanc propre pour un PDF net.
+   cv.css — CV numérique : reproduction fidèle du CV PDF (bleu marine).
+   Écran : "feuille" blanche posée sur la page sombre.
+   Impression : A4 sur UNE page, sans en-têtes navigateur.
    ================================================================= */
 
+:root {
+  --cv-navy: #22416b;
+  --cv-navy-d: #1a3354;
+  --cv-ink: #1c1c1c;
+  --cv-gray: #3f3f3f;
+  --cv-rule: #c7d0dc;
+}
+
+/* Barre d'outils (thème du site) */
 .cv-toolbar {
   position: sticky; top: 64px; z-index: 50;
   display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between;
-  max-width: 940px; margin: 0 auto 18px; padding: 12px 4px;
+  max-width: 820px; margin: 0 auto 18px; padding: 12px 4px;
 }
 .cv-toolbar .hint { font-family: var(--font-head); letter-spacing: .1em; text-transform: uppercase; font-size: .74rem; color: var(--text-dim); }
 .cv-toolbar .hint b { color: var(--cyan); }
 
+/* ---------- La feuille CV ---------- */
 .cv-doc {
-  max-width: 940px; margin: 0 auto 60px;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  --c: 16px;
-  clip-path: polygon(var(--c) 0,100% 0,100% calc(100% - var(--c)),calc(100% - var(--c)) 100%,0 100%,0 var(--c));
+  max-width: 820px; margin: 0 auto 60px;
+  background: #fff; color: var(--cv-ink);
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 13.5px; line-height: 1.4;
+  padding: 34px 40px 38px;
+  box-shadow: 0 0 0 1px #e6e6e6, 0 24px 60px rgba(0, 0, 0, .45);
 }
 
-/* En-tête */
-.cv-head { display: grid; grid-template-columns: 130px 1fr; gap: 26px; padding: 32px 36px; border-bottom: 2px solid var(--accent); align-items: center; }
-.cv-photo { width: 130px; height: 130px; object-fit: cover; object-position: top center; border: 2px solid var(--border-bright);
-  clip-path: polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px); }
-.cv-head h1 { font-family: var(--font-display); font-weight: 900; font-size: clamp(1.8rem, 4.5vw, 2.6rem); text-transform: uppercase; line-height: 1; letter-spacing: .02em; }
-.cv-head .role { font-family: var(--font-head); font-weight: 600; letter-spacing: .06em; color: var(--accent); margin: 8px 0 12px; font-size: 1.05rem; }
-.cv-contacts { display: flex; flex-wrap: wrap; gap: 8px 18px; font-family: var(--font-head); font-size: .86rem; color: var(--text-dim); }
-.cv-contacts a { color: var(--text-dim); }
-.cv-contacts a:hover { color: var(--cyan); }
-.cv-contacts span, .cv-contacts a { display: inline-flex; align-items: center; gap: 6px; }
+/* En-tête : photo + identité */
+.cv-head { display: grid; grid-template-columns: 118px 1fr; gap: 26px; align-items: center; }
+.cv-photo { width: 118px; height: 118px; border-radius: 50%; object-fit: cover; object-position: top center; border: 3px solid var(--cv-navy); }
+.cv-head h1 { font-weight: 800; font-size: 2.05rem; letter-spacing: .03em; color: var(--cv-navy); text-transform: uppercase; line-height: 1.05; }
+.cv-contacts { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-top: 7px; font-size: .82rem; color: var(--cv-gray); }
+.cv-contacts a { color: var(--cv-gray); text-decoration: none; }
+.cv-contacts a:hover { color: var(--cv-navy); text-decoration: underline; }
+.cv-contacts .sep { color: var(--cv-navy); font-weight: 700; }
+.cv-accroche { margin-top: 9px; font-size: .85rem; color: var(--cv-gray); line-height: 1.45; max-width: 64ch; }
 
-.cv-accroche { padding: 18px 36px; color: var(--text-dim); border-bottom: 1px solid var(--border); font-size: .96rem; }
-.cv-accroche b { color: var(--text); }
+/* Barre épaisse sous l'en-tête */
+.cv-bar { height: 6px; background: var(--cv-navy); margin: 16px 0 4px; }
 
-.cv-body { display: grid; grid-template-columns: 300px 1fr; }
-.cv-side { padding: 26px 28px; border-right: 1px solid var(--border); background: var(--panel-2); }
-.cv-main { padding: 26px 32px; }
-
-.cv-sec { margin-bottom: 24px; }
-.cv-sec:last-child { margin-bottom: 0; }
-.cv-sec h2 {
-  font-family: var(--font-head); font-weight: 700; text-transform: uppercase;
-  letter-spacing: .12em; font-size: .92rem; color: var(--accent);
-  padding-bottom: 6px; margin-bottom: 12px; border-bottom: 1px solid var(--border);
+/* Sections */
+.cv-sec { margin-top: 13px; break-inside: avoid; }
+.cv-sec > h2 {
+  color: var(--cv-navy); font-weight: 800; font-size: 1.06rem;
+  text-transform: uppercase; letter-spacing: .02em;
+  border-bottom: 1.5px solid var(--cv-rule); padding-bottom: 3px; margin-bottom: 8px;
 }
-.cv-entry { margin-bottom: 16px; }
+
+/* Education : 2 colonnes */
+.cv-edu { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 26px; }
+.cv-edu .t { color: var(--cv-navy); font-weight: 700; font-size: .92rem; }
+.cv-edu .d { font-size: .85rem; color: var(--cv-gray); }
+
+/* Entrées (projets / expériences) */
+.cv-entry { margin-bottom: 9px; break-inside: avoid; }
 .cv-entry:last-child { margin-bottom: 0; }
-.cv-entry .top { display: flex; justify-content: space-between; gap: 10px; align-items: baseline; }
-.cv-entry .ttl { font-family: var(--font-head); font-weight: 700; font-size: 1.02rem; }
-.cv-entry .when { font-family: var(--font-head); font-size: .78rem; letter-spacing: .04em; color: var(--cyan); white-space: nowrap; }
-.cv-entry .org { color: var(--text-dim); font-size: .9rem; margin-top: 1px; }
-.cv-entry .org .place { color: var(--text-faint); }
-.cv-entry ul { margin-top: 7px; display: grid; gap: 5px; }
-.cv-entry li { position: relative; padding-left: 16px; color: var(--text-dim); font-size: .9rem; line-height: 1.45; }
-.cv-entry li::before { content: "▪"; position: absolute; left: 0; color: var(--accent); }
-.cv-entry li b { color: var(--text); }
+.cv-entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; }
+.cv-entry-head .ttl { color: var(--cv-navy); font-weight: 700; font-size: .94rem; }
+.cv-entry-head .when { color: var(--cv-navy); font-weight: 700; font-size: .8rem; white-space: nowrap; }
+.cv-entry .lead { font-size: .85rem; color: var(--cv-gray); margin: 2px 0 3px; }
+.cv-entry ul { margin: 2px 0 0; padding-left: 18px; }
+.cv-entry li { font-size: .85rem; color: var(--cv-gray); line-height: 1.38; margin-bottom: 1px; }
+.cv-entry li b { color: var(--cv-ink); }
 
-.cv-skill { margin-bottom: 12px; }
-.cv-skill .lbl { font-family: var(--font-head); font-weight: 700; font-size: .82rem; letter-spacing: .04em; color: var(--text); margin-bottom: 3px; }
-.cv-skill .val { font-size: .84rem; color: var(--text-dim); line-height: 1.45; }
-.cv-list { font-size: .86rem; color: var(--text-dim); line-height: 1.6; }
-.cv-list .k { font-family: var(--font-head); font-weight: 700; color: var(--text); }
+/* Compétences : libellé / valeur */
+.cv-skills { display: grid; gap: 3px; }
+.cv-skills .row { display: grid; grid-template-columns: 158px 1fr; gap: 14px; align-items: baseline; }
+.cv-skills .lbl { color: var(--cv-navy); font-weight: 700; font-size: .88rem; }
+.cv-skills .val { font-size: .85rem; color: var(--cv-gray); }
+.cv-soft { font-size: .85rem; color: var(--cv-gray); margin-top: 7px; line-height: 1.4; }
 
-.cv-contact-side { display: grid; gap: 8px; font-size: .84rem; }
-.cv-contact-side a, .cv-contact-side span { display: flex; align-items: center; gap: 9px; color: var(--text-dim); }
-.cv-contact-side a:hover { color: var(--cyan); }
-.cv-contact-side svg { width: 15px; height: 15px; color: var(--accent); flex: none; }
+/* Langues & centres */
+.cv-line { font-size: .85rem; color: var(--cv-gray); margin: 3px 0; }
+.cv-line b { color: var(--cv-ink); }
 
-@media (max-width: 760px) {
-  .cv-body { grid-template-columns: 1fr; }
-  .cv-side { border-right: 0; border-bottom: 1px solid var(--border); }
-  .cv-head { grid-template-columns: 96px 1fr; gap: 18px; padding: 24px; }
-  .cv-photo { width: 96px; height: 96px; }
+@media (max-width: 680px) {
+  .cv-doc { padding: 22px; }
+  .cv-head { grid-template-columns: 84px 1fr; gap: 16px; }
+  .cv-photo { width: 84px; height: 84px; }
+  .cv-head h1 { font-size: 1.5rem; }
+  .cv-edu, .cv-skills .row { grid-template-columns: 1fr; }
   .cv-toolbar { top: 60px; }
 }
 
-/* =================== IMPRESSION =================== */
+/* =================== IMPRESSION : 1 page A4, sans en-têtes navigateur =================== */
+@page { size: A4 portrait; margin: 0; }   /* margin:0 => supprime date/heure/titre/URL du navigateur */
+
 @media print {
-  @page { size: A4; margin: 12mm; }
-  html, body { background: #fff !important; color: #111 !important; }
+  html, body { background: #fff !important; }
   body.locked { overflow: visible !important; height: auto !important; }
 
-  /* on masque tout le HUD / overlays / interactif */
+  /* on masque tout le chrome du site */
   .hud-top, .mnav, .loader, .transition-veil, .fx-grid, .fx-scanlines, .fx-vignette,
-  .crosshair, .minimap, .ach-stack, .chat-fab, .chat-panel, .cv-toolbar, .foot, .scroll-hint {
-    display: none !important;
-  }
+  .crosshair, .minimap, .ach-stack, .chat-fab, .chat-panel, .cv-toolbar, .foot { display: none !important; }
   body.crosshair-on { cursor: auto !important; }
+  main { padding: 0 !important; margin: 0 !important; }
 
-  main { padding: 0 !important; }
+  /* La feuille occupe la page entière (marges gérées par le padding) ; tailles compactées pour tenir sur 1 page */
   .cv-doc {
-    max-width: none; margin: 0; border: none; clip-path: none !important;
-    background: #fff !important; color: #111 !important;
+    max-width: none; margin: 0; box-shadow: none;
+    padding: 11mm 13mm 9mm;
+    font-size: 9.4pt; line-height: 1.3;
   }
-  .cv-head { border-bottom: 2px solid #c0202d; padding: 0 0 14px; }
-  .cv-photo { border-color: #999; clip-path: none !important; border-radius: 4px; }
-  .cv-head h1 { color: #111 !important; }
-  .cv-head .role { color: #c0202d !important; }
-  .cv-accroche { padding: 12px 0; border-color: #ddd; color: #333 !important; }
-  .cv-accroche b { color: #111 !important; }
-  .cv-body { grid-template-columns: 270px 1fr; }
-  .cv-side { background: #fff !important; border-right: 1px solid #ddd; padding: 18px 18px 0 0; }
-  .cv-main { padding: 18px 0 0 22px; }
-  .cv-sec h2 { color: #c0202d !important; border-color: #ccc; }
-  .cv-entry .ttl, .cv-entry li b, .cv-skill .lbl, .cv-list .k { color: #111 !important; }
-  .cv-entry .when { color: #555 !important; }
-  .cv-entry .org, .cv-entry li, .cv-skill .val, .cv-list, .cv-contact-side a, .cv-contact-side span { color: #333 !important; }
-  .cv-entry li::before, .cv-contact-side svg { color: #c0202d !important; }
-  .cv-sec { break-inside: avoid; }
-  .cv-entry { break-inside: avoid; }
-  a { text-decoration: none !important; }
+  .cv-head { grid-template-columns: 86px 1fr; gap: 16px; }
+  .cv-photo { width: 86px; height: 86px; border-width: 2px; }
+  .cv-head h1 { font-size: 20pt; }
+  .cv-contacts { font-size: 8.4pt; margin-top: 4px; gap: 2px 12px; }
+  .cv-accroche { font-size: 8.6pt; margin-top: 6px; line-height: 1.3; }
+  .cv-bar { height: 4px; margin: 9px 0 2px; }
+  .cv-sec { margin-top: 8px; }
+  .cv-sec > h2 { font-size: 11pt; margin-bottom: 5px; padding-bottom: 2px; }
+  .cv-edu { gap: 6px 22px; }
+  .cv-edu .t { font-size: 8.8pt; }
+  .cv-edu .d, .cv-entry .lead, .cv-entry li, .cv-skills .val, .cv-soft, .cv-line { font-size: 8.6pt; }
+  .cv-entry { margin-bottom: 6px; }
+  .cv-entry-head .ttl { font-size: 9pt; }
+  .cv-entry-head .when { font-size: 8.2pt; }
+  .cv-entry ul { padding-left: 15px; }
+  .cv-entry li { line-height: 1.28; }
+  .cv-skills .row { grid-template-columns: 150px 1fr; gap: 12px; }
+  .cv-skills .lbl { font-size: 8.8pt; }
+  .cv-soft { margin-top: 5px; }
+
+  a { color: inherit !important; text-decoration: none !important; }
   * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; box-shadow: none !important; }
 }
