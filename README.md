@@ -1,6 +1,6 @@
 # Portfolio Web Augmenté — Hugo Alves Miranda
 
-Portfolio personnel d'Hugo Alves Miranda — étudiant Data, futur ingénieur **Big Data & Machine Learning** (EFREI Paris, majeure en apprentissage), en recherche d'alternance 2 ans (rythme 2 j école / 3 j entreprise) à partir de septembre 2026.
+Portfolio personnel d'Hugo Alves Miranda — étudiant Data, futur ingénieur **Big Data & Machine Learning** (EFREI Paris, majeure en apprentissage), en recherche d'alternance 3 ans (rythme 2 j école / 3 j entreprise) à partir de septembre 2026.
 
 Direction artistique **« FPS tactique »** (réf. Valorant) : néon-sur-noir, panneaux à coins coupés, curseur réticule, scanlines, et des fonctionnalités *augmentées* qui démontrent en live les compétences IA/Data du candidat.
 
